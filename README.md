@@ -122,6 +122,25 @@ Zmień liczby i opisy zgodnie ze swoją rzeczywistością.
 
 Od tej chwili każdy commit w repo → strona aktualizuje się automatycznie.
 
+### Świeży projekt: baza Neon + zmienne środowiskowe
+
+Strona i panele czytają produkty z bazy (`GET /api/products`), więc **na nowym
+projekcie trzeba podłączyć bazę, inaczej lista produktów będzie pusta.**
+
+1. **Baza:** w Vercelu **Storage → Create → Neon** (albo własny Neon) — Vercel sam
+   doda zmienną **`DATABASE_URL`**.
+2. **Tabele + dane startowe:** w Neon → **SQL Editor** wklej **całą zawartość
+   `data/setup.sql`** i uruchom raz. Tworzy tabele `products` i `onboarding_cards`
+   oraz wgrywa dane startowe (22 produkty + 26 kart Modułu 1). Plik jest bezpieczny
+   do ponownego uruchomienia (nie duplikuje danych).
+3. **Sekret admina:** w **Settings → Environment Variables** dodaj **`ADMIN_SECRET`**
+   = dowolny długi losowy ciąg. To hasło do obu paneli (`/admin-langer/` i
+   `/admin-langer/onboarding.html`). Po dodaniu zmiennych zrób **Redeploy**.
+
+Po tym: strona pokazuje produkty, `/onboarding/` ciągnie karty z bazy, a treść
+edytujesz w panelach. (Zamiast `setup.sql` możesz też uruchomić sam
+`data/onboarding-schema.sql` i zaimportować karty przyciskiem w panelu onboardingu.)
+
 ### Własna domena
 
 Po wdrożeniu w panelu Vercela: **Settings → Domains → Add** i podaj swoją domenę (np. `langerdystrybucja.pl`). Vercel pokaże jakie rekordy DNS ustawić u Twojego rejestratora.
