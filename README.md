@@ -153,10 +153,15 @@ Osobna aplikacja szkoleniowa pod adresem **`/onboarding/`** — wprowadza nowych
 handlowców w firmę, produkty, segmenty i sposób sprzedaży. Plan: 5 modułów
 (0 Kontekst → 1 Produkty → 2 Segmenty → 3 Rozmowy → 4 Zestawy).
 
-**Status: Moduł 1 (Produkty) działa w pełni** — fiszki z obracaniem, system
-„umiem / jeszcze raz" (postęp zapisywany w przeglądarce) oraz quiz generowany
-z tych samych kart. Moduł 0 to treść do przeczytania; moduły 2–4 są oznaczone
-„Wkrótce". Aplikacja ma wbudowany komplet kart (tryb demo), więc działa nawet
+**Każdy moduł ma materiały do nauki.** Moduł 0 (Kontekst) i moduły 2–4
+(Segmenty, Rozmowy, Zestawy) to lekcje do czytania — karty produktowe, tabele,
+schematy rozmów krok po kroku i obrona przed obiekcjami (treść z Vademecum,
+wpisana w `onboarding/index.html` w strukturze `CONTENT`). **Moduł 1 (Produkty)**
+ma dodatkowo trzy tryby: **Materiały** (karty produktowe), **Fiszki** (obracane,
+z systemem „umiem / jeszcze raz", postęp w przeglądarce) i **Quiz** (generowany
+z tych samych kart). Logika nauki: najpierw materiały → fiszki → quiz.
+
+Fiszki/quiz Modułu 1 mają wbudowany komplet kart (tryb demo), więc działają nawet
 zanim podłączysz bazę.
 
 **Treść w bazie + panel admina:**
