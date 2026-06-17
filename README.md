@@ -128,12 +128,54 @@ Po wdrożeniu w panelu Vercela: **Settings → Domains → Add** i podaj swoją 
 
 ---
 
+## Platforma onboardingowa (dla pracowników)
+
+Osobna aplikacja szkoleniowa pod adresem **`/onboarding/`** — wprowadza nowych
+handlowców w firmę, produkty, segmenty i sposób sprzedaży. Plan: 5 modułów
+(0 Kontekst → 1 Produkty → 2 Segmenty → 3 Rozmowy → 4 Zestawy).
+
+**Status: Moduł 1 (Produkty) działa w pełni** — fiszki z obracaniem, system
+„umiem / jeszcze raz" (postęp zapisywany w przeglądarce) oraz quiz generowany
+z tych samych kart. Moduł 0 to treść do przeczytania; moduły 2–4 są oznaczone
+„Wkrótce". Aplikacja ma wbudowany komplet kart (tryb demo), więc działa nawet
+zanim podłączysz bazę.
+
+**Treść w bazie + panel admina:**
+
+1. **Schemat:** uruchom raz `data/onboarding-schema.sql` w konsoli Neon (SQL Editor) —
+   tworzy tabelę `onboarding_cards`.
+2. **Zasilenie startowe:** wejdź na **`/admin-langer/onboarding.html`** (login: ten sam
+   `ADMIN_SECRET`), kliknij **„Zaimportuj startowy Moduł 1"** — wgra komplet kart z Vademecum.
+3. **Edycja:** w panelu dodajesz / edytujesz / usuwasz karty. Jedna karta = jedna
+   fiszka **i** jedno pytanie quizu (dystraktory losowane z pozostałych kart),
+   więc utrzymujesz tylko jedno źródło treści.
+
+API: `GET /api/onboarding/cards?module=1` (publiczne, czyta aplikacja) oraz
+`POST/PUT/DELETE` (wymaga `Bearer ADMIN_SECRET`, jak panel produktów).
+
+---
+
 ## Struktura plików
 
 ```
 .
-├── index.html              # ⭐ JEDYNY plik potrzebny do działania strony
+├── index.html              # ⭐ Strona firmowa (publiczna)
 ├── README.md               # Ten plik
+├── onboarding/
+│   └── index.html          # Aplikacja onboardingowa (fiszki + quiz)
+├── admin-langer/
+│   ├── index.html          # Panel admina — produkty
+│   └── onboarding.html     # Panel admina — treść szkoleń (karty)
+├── api/
+│   ├── products.js         # API produktów (Neon)
+│   ├── products/[sku].js
+│   └── onboarding/
+│       ├── cards.js        # API kart onboardingu (GET lista / POST)
+│       └── cards/[id].js   # GET / PUT / DELETE pojedynczej karty
+├── data/
+│   ├── onboarding-schema.sql   # Schemat tabeli onboarding_cards (Neon)
+│   ├── onboarding/module1.json # Treść startowa Modułu 1 (referencja)
+│   └── products/*.json
 └── project/                # Archiwum — oryginalne pliki źródłowe (rozbite)
     ├── brand.css           # Tokeny kolorów, fonty, spacing
     ├── site.css            # Style sekcji i komponentów
