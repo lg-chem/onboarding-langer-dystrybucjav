@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Onboarding · Langer</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+:root {
+  --flame: #F04E23; --flame-600: #D63F18; --flame-tint: #FBE7DF;
+  --navy: #0E1533; --navy-800: #161E45; --navy-900: #080C22;
+  --cobalt: #1E3FB5; --ash: #8B9199; --ash-700: #565D67;
+  --light: #EEF0F3; --paper: #F6F7F9; --white: #FFFFFF;
+  --line: #E2E5EA; --line-2: #CFD4DC;
+  --green: #16A34A; --green-tint: #DCFCE7;
+  --red: #DC2626; --red-tint: #FEE2E2;
+  --amber: #D97706; --amber-tint: #FEF3C7;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-text: 'Hanken Grotesk', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --r-sm: 6px; --r-md: 10px; --r-lg: 16px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; min-height: 100vh; }
+body { background: var(--paper); color: var(--navy); font-family: var(--font-text); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+input, select, textarea { font-family: inherit; }
+a { color: inherit; }
+
+.adm-hdr { background: var(--navy); color: #fff; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+.adm-hdr-l { display: flex; align-items: center; gap: 16px; }
+.adm-hdr-title { font-family: var(--font-display); font-weight: 700; font-size: 18px; letter-spacing: -0.01em; }
+.adm-hdr-sub { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; color: rgba(255,255,255,.55); text-transform: uppercase; }
+.adm-hdr-btn { padding: 8px 14px; border-radius: var(--r-sm); font-size: 13px; font-weight: 600; color: rgba(255,255,255,.85); border: 1px solid rgba(255,255,255,.18); display: inline-flex; align-items: center; gap: 6px; }
+.adm-hdr-btn:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.4); }
+
+.adm-main { max-width: 1100px; margin: 0 auto; padding: 32px 24px 64px; }
+.adm-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 28px; }
+.adm-card + .adm-card { margin-top: 20px; }
+.adm-card-h { font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: -0.02em; margin: 0 0 8px; }
+.adm-card-d { color: var(--ash-700); font-size: 14px; margin: 0 0 20px; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-display); font-weight: 600; font-size: 14px; padding: 10px 18px; border-radius: var(--r-sm); transition: background .12s; white-space: nowrap; }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn-flame { background: var(--flame); color: #fff; }
+.btn-flame:hover:not(:disabled) { background: var(--flame-600); }
+.btn-ghost { background: var(--white); color: var(--navy); border: 1.5px solid var(--line-2); }
+.btn-ghost:hover:not(:disabled) { border-color: var(--navy); }
+.btn-icon { width: 32px; height: 32px; padding: 0; border-radius: var(--r-sm); color: var(--ash); }
+.btn-icon:hover:not(:disabled) { color: var(--red); background: var(--red-tint); }
+
+.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.field label { font-size: 12px; font-weight: 600; color: var(--ash-700); letter-spacing: 0.04em; text-transform: uppercase; }
+.field input, .field select, .field textarea { font-size: 15px; padding: 10px 12px; border: 1.5px solid var(--line-2); border-radius: var(--r-sm); background: var(--white); color: var(--navy); transition: border-color .15s, box-shadow .15s; }
+.field textarea { resize: vertical; min-height: 64px; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(14,21,51,.08); }
+
+.login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; background: linear-gradient(180deg, var(--navy) 0%, var(--navy-900) 100%); }
+.login-card { background: var(--white); border-radius: var(--r-lg); padding: 36px; max-width: 420px; width: 100%; box-shadow: 0 24px 48px -16px rgba(0,0,0,.4); }
+.login-h { font-family: var(--font-display); font-weight: 700; font-size: 26px; letter-spacing: -0.02em; margin: 8px 0 6px; }
+.login-d { color: var(--ash-700); font-size: 14.5px; margin: 0 0 24px; }
+.login-help { font-size: 12.5px; color: var(--ash); margin: 6px 0 0; line-height: 1.4; }
+.login-err { background: var(--red-tint); color: var(--red); padding: 10px 14px; border-radius: var(--r-sm); font-size: 13.5px; margin-bottom: 16px; }
+
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r-md); margin-top: 16px; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+table.tbl th { background: var(--light); padding: 10px 12px; text-align: left; font-weight: 600; font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ash-700); border-bottom: 1px solid var(--line); white-space: nowrap; }
+table.tbl td { padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.tbl tr:last-child td { border-bottom: none; }
+
+.muted { color: var(--ash); font-size: 13px; }
+.mono { font-family: var(--font-mono); font-size: 12.5px; }
+.spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid currentColor; border-top-color: transparent; border-radius: 50%; animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.flex-between { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.gap-2 { display: flex; gap: 8px; }
+.tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--light); color: var(--ash-700); margin: 0 4px 4px 0; }
+.modal-bg { position: fixed; inset: 0; background: rgba(8,12,34,.6); z-index: 100; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.modal { background: var(--white); border-radius: var(--r-lg); padding: 28px; max-width: 560px; width: 100%; max-height: 90vh; overflow-y: auto; }
+.modal-h { font-family: var(--font-display); font-weight: 700; font-size: 20px; margin: 0 0 16px; }
+.alert-ok { background: var(--green-tint); color: var(--green); padding: 12px 16px; border-radius: var(--r-sm); font-size: 13.5px; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone@7.25.6/babel.min.js"></script>
+
+  <script type="text/babel">
+const { useState, useEffect, useMemo } = React;
+
+/* SEED — ten sam zestaw co tryb demo aplikacji (bez pól id) */
+const SEED_M1 = [
+  { module: 1, topic: 'Zasada sprzedaży', front: 'Którą markę proponujemy domyślnie tam, gdzie mamy kontakt z klientem?', back: 'Langer (marka własna) — ma wyższą marżę niż dystrybucja.', tags: ['Strategia','Langer'], sort_order: 1 },
+  { module: 1, topic: 'Zasada sprzedaży', front: 'Jaka jest rola Soudala w sprzedaży?', back: 'Kotwica zaufania — znana marka dla tych, którzy nie chcą zmieniać.', tags: ['Strategia','Soudal'], sort_order: 2 },
+  { module: 1, topic: 'Piana Langer 70', front: 'Piana Langer 70 — wydajność?', back: 'Do 70 l (standard to ~45 l).', tags: ['Langer','Piany'], sort_order: 10 },
+  { module: 1, topic: 'Piana Langer 70', front: 'Piana Langer 70 — czas cięcia?', back: '15–30 min.', tags: ['Langer','Piany'], sort_order: 11 },
+  { module: 1, topic: 'Piana Langer 70', front: 'Piana Langer 70 — główne zastosowanie?', back: 'Montaż ościeżnic okien i drzwi.', tags: ['Langer','Piany'], sort_order: 12 },
+  { module: 1, topic: 'Piana Langer 70', front: 'Piana Langer 70 — czego się nie trzyma?', back: 'PE, PP, silikonu, teflonu, tłustych podłoży.', tags: ['Langer','Piany'], sort_order: 13 },
+  { module: 1, topic: 'Langer Economy Line', front: 'Langer Economy — wydajność?', back: 'Do 45 l.', tags: ['Langer','Piany'], sort_order: 20 },
+  { module: 1, topic: 'Langer Economy Line', front: 'Langer Economy — wzrost objętości?', back: '~30% — niskoprężna, bez odkształceń.', tags: ['Langer','Piany'], sort_order: 21 },
+  { module: 1, topic: 'Langer Economy Line', front: 'Po co mamy Langer Economy?', back: 'Najtańsze wejście marki własnej — opcja dla patrzących na cenę.', tags: ['Langer','Piany'], sort_order: 22 },
+  { module: 1, topic: 'Langer XL Fast', front: 'Langer XL Fast — czym różni się od Langer 70?', back: 'Szybsze wiązanie (~30 min), nastawiona na montaż stolarki.', tags: ['Langer','Piany'], sort_order: 30 },
+  { module: 1, topic: 'Langer XL Fast', front: 'Langer XL Fast — wydajność?', back: 'Do 65 l.', tags: ['Langer','Piany'], sort_order: 31 },
+  { module: 1, topic: 'Langer XL Fast', front: 'Langer XL Fast — kluczowa cecha przy ramach?', back: 'Niska rozszerzalność wtórna = minimalne naprężenia na ościeżnice.', tags: ['Langer','Piany'], sort_order: 32 },
+  { module: 1, topic: 'Langer 70 Zimowa', front: 'Langer 70 Zimowa — kiedy oferujemy?', back: 'Sezonowo zimą, do montażu w mrozie do −10°C.', tags: ['Langer','Sezon'], sort_order: 40 },
+  { module: 1, topic: 'Klej Langer Tur', front: 'Langer Tur — baza chemiczna?', back: 'MS Polimer.', tags: ['Langer','Kleje'], sort_order: 50 },
+  { module: 1, topic: 'Klej Langer Tur', front: 'Langer Tur — chwyt początkowy?', back: 'Do 500 kg/m² — bez podpierania.', tags: ['Langer','Kleje'], sort_order: 51 },
+  { module: 1, topic: 'Klej Langer Tur', front: 'Langer Tur — główna korzyść dla wykonawcy?', back: 'Koniec z podpieraniem = szybsza praca.', tags: ['Langer','Kleje'], sort_order: 52 },
+  { module: 1, topic: 'Klej Langer Tur', front: 'Langer Tur — wytrzymałość końcowa?', back: '22 kg/cm².', tags: ['Langer','Kleje'], sort_order: 53 },
+  { module: 1, topic: 'Pianoklej Langer Express 60s', front: 'Express 60s — po ilu sekundach start utwardzania?', back: '60 sekund.', tags: ['Langer','Pianokleje'], sort_order: 60 },
+  { module: 1, topic: 'Pianoklej Langer Express 60s', front: 'Express 60s — czas na korektę?', back: '2 minuty.', tags: ['Langer','Pianokleje'], sort_order: 61 },
+  { module: 1, topic: 'Pianoklej Langer Express 60s', front: 'Express 60s — max szerokość spoiny?', back: '30 mm.', tags: ['Langer','Pianokleje'], sort_order: 62 },
+  { module: 1, topic: 'Pianoklej Langer do styropianu', front: 'Langer do styropianu — wydajność?', back: 'Do 10 m² z puszki.', tags: ['Langer','Pianokleje'], sort_order: 70 },
+  { module: 1, topic: 'Pianoklej Langer do styropianu', front: 'Langer do styropianu — λ (lambda)?', back: '0,034 W/(m·K).', tags: ['Langer','Pianokleje'], sort_order: 71 },
+  { module: 1, topic: 'Pianoklej Langer do styropianu', front: 'Langer do styropianu — do czego głównie?', back: 'Klejenie styropianu EPS na fasadach.', tags: ['Langer','Pianokleje'], sort_order: 72 },
+  { module: 1, topic: 'Pistolet T400 PTFE', front: 'Pistolet T400 — dlaczego proponować przy piankach?', back: 'Kontrola aplikacji + oszczędność piany; naturalny dodatek do koszyka.', tags: ['Akcesoria'], sort_order: 80 },
+  { module: 1, topic: 'Soudal — piany', front: 'Które piany Soudal najwięcej schodzą w punktach?', back: 'Soudal Classic i Soudal Yellow.', tags: ['Soudal','Piany'], sort_order: 90 },
+  { module: 1, topic: 'Distyk', front: 'Jak pozycjonujemy markę Distyk?', back: 'Tańsza alternatywa dla Soudala (silikony, akryle) — wyższa marża.', tags: ['Distyk'], sort_order: 100 },
+];
+
+const MODULE_NAMES = { 0:'Kontekst', 1:'Produkty', 2:'Segmenty', 3:'Rozmowy', 4:'Zestawy' };
+
+function getSecret() { return localStorage.getItem('admin_secret') || ''; }
+
+async function apiCall(path, options = {}) {
+  const secret = getSecret();
+  const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) };
+  if (secret) headers.Authorization = `Bearer ${secret}`;
+  const res = await fetch(path, { ...options, headers });
+  const text = await res.text();
+  let data;
+  try { data = text ? JSON.parse(text) : {}; } catch { data = { error: text }; }
+  if (!res.ok) { const err = new Error(data.error || `Błąd ${res.status}`); err.status = res.status; throw err; }
+  return data;
+}
+const apiList   = ()       => apiCall('/api/onboarding/cards');
+const apiCreate = (c)      => apiCall('/api/onboarding/cards', { method: 'POST', body: JSON.stringify(c) });
+const apiUpdate = (id, c)  => apiCall(`/api/onboarding/cards/${id}`, { method: 'PUT', body: JSON.stringify(c) });
+const apiDelete = (id)     => apiCall(`/api/onboarding/cards/${id}`, { method: 'DELETE' });
+
+const Svg = ({ s = 18, children }) => (
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{children}</svg>
+);
+const ITrash = (p) => <Svg {...p}><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></Svg>;
+const IPlus  = (p) => <Svg {...p}><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></Svg>;
+const IEdit  = (p) => <Svg {...p}><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></Svg>;
+const IRefresh = (p) => <Svg {...p}><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></Svg>;
+const ILogout = (p) => <Svg {...p}><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></Svg>;
+
+function Login({ onLogin }) {
+  const [secret, setSecret] = useState(getSecret());
+  const [err, setErr] = useState('');
+  const [loading, setLoading] = useState(false);
+  async function submit(e) {
+    e.preventDefault(); setErr('');
+    if (!secret) { setErr('Wpisz ADMIN_SECRET'); return; }
+    setLoading(true);
+    localStorage.setItem('admin_secret', secret);
+    try {
+      const res = await fetch('/api/onboarding/cards', {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${secret}` }, body: JSON.stringify({})
+      });
+      if (res.status === 401) { localStorage.removeItem('admin_secret'); throw new Error('Niepoprawny ADMIN_SECRET'); }
+      onLogin();
+    } catch (e) { setErr(e.message); } finally { setLoading(false); }
+  }
+  return (
+    <div className="login-wrap">
+      <form className="login-card" onSubmit={submit}>
+        <svg width="48" height="48" viewBox="0 0 64 64" fill="none">
+          <rect x="13" y="7" width="11" height="35" rx="5.5" fill="var(--navy)" />
+          <rect x="18.5" y="38" width="6" height="10" rx="3" fill="var(--navy)" />
+          <rect x="13" y="46" width="42" height="13" rx="6.5" fill="var(--flame)" />
+        </svg>
+        <h1 className="login-h">Onboarding — treść</h1>
+        <p className="login-d">Langer Grupa · strefa wewnętrzna</p>
+        {err && <div className="login-err">{err}</div>}
+        <div className="field">
+          <label>ADMIN_SECRET</label>
+          <input type="password" value={secret} onChange={e => setSecret(e.target.value)} required autoFocus />
+          <p className="login-help">Ten sam ciąg co w Vercel → <code>ADMIN_SECRET</code> (jak panel produktów).</p>
+        </div>
+        <button type="submit" className="btn btn-flame" style={{ width: '100%', padding: 14 }} disabled={loading}>
+          {loading ? <><span className="spinner"/> Sprawdzam...</> : 'Zaloguj się'}
+        </button>
+      </form>
+    </div>
+  );
+}
+
+function CardForm({ initial, onSave, onCancel }) {
+  const isEdit = !!initial;
+  const [c, setC] = useState(initial || { module: 1, topic: '', front: '', back: '', tags: [], sort_order: 0 });
+  const [saving, setSaving] = useState(false);
+  const [err, setErr] = useState('');
+  const set = (k, v) => setC({ ...c, [k]: v });
+
+  async function submit(e) {
+    e.preventDefault(); setErr('');
+    if (!c.front || !c.back) { setErr('Przód i tył są wymagane.'); return; }
+    setSaving(true);
+    try {
+      const body = {
+        module: Number(c.module), topic: c.topic || null, front: c.front.trim(), back: c.back.trim(),
+        tags: Array.isArray(c.tags) ? c.tags : String(c.tags).split('|').map(s => s.trim()).filter(Boolean),
+        sort_order: Number(c.sort_order) || 0,
+      };
+      if (isEdit) await apiUpdate(initial.id, body); else await apiCreate(body);
+      onSave();
+    } catch (e) { setErr(e.message); } finally { setSaving(false); }
+  }
+
+  return (
+    <div className="modal-bg" onClick={onCancel}>
+      <form className="modal" onClick={e => e.stopPropagation()} onSubmit={submit}>
+        <h3 className="modal-h">{isEdit ? `Edytuj kartę #${initial.id}` : 'Nowa karta'}</h3>
+        {err && <div className="login-err">{err}</div>}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+          <div className="field">
+            <label>Moduł</label>
+            <select value={c.module} onChange={e => set('module', e.target.value)}>
+              {Object.entries(MODULE_NAMES).map(([id, name]) => <option key={id} value={id}>{id} — {name}</option>)}
+            </select>
+          </div>
+          <div className="field">
+            <label>Kolejność</label>
+            <input type="number" value={c.sort_order} onChange={e => set('sort_order', e.target.value)} />
+          </div>
+        </div>
+        <div className="field">
+          <label>Temat / grupa</label>
+          <input value={c.topic || ''} onChange={e => set('topic', e.target.value)} placeholder="np. Piana Langer 70" />
+        </div>
+        <div className="field">
+          <label>Przód (pytanie) *</label>
+          <textarea value={c.front} onChange={e => set('front', e.target.value)} required />
+        </div>
+        <div className="field">
+          <label>Tył (odpowiedź) *</label>
+          <textarea value={c.back} onChange={e => set('back', e.target.value)} required />
+        </div>
+        <div className="field">
+          <label>Tagi (oddziel pionowymi kreskami)</label>
+          <input
+            value={Array.isArray(c.tags) ? c.tags.join('|') : (c.tags || '')}
+            onChange={e => set('tags', e.target.value.split('|').map(s => s.trim()).filter(Boolean))}
+            placeholder="np. Langer|Piany"
+          />
+        </div>
+        <div className="gap-2" style={{ marginTop: 20, justifyContent: 'flex-end' }}>
+          <button type="button" className="btn btn-ghost" onClick={onCancel} disabled={saving}>Anuluj</button>
+          <button type="submit" className="btn btn-flame" disabled={saving}>{saving ? <><span className="spinner"/> Zapisuję...</> : 'Zapisz'}</button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
+function App() {
+  const [authed, setAuthed] = useState(!!getSecret());
+  const [cards, setCards] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState('');
+  const [moduleFilter, setModuleFilter] = useState('all');
+  const [editing, setEditing] = useState(null);
+  const [adding, setAdding] = useState(false);
+  const [seeding, setSeeding] = useState(false);
+  const [seedMsg, setSeedMsg] = useState('');
+
+  async function reload() {
+    setLoading(true); setErr('');
+    try { setCards(await apiList()); } catch (e) { setErr(e.message); } finally { setLoading(false); }
+  }
+  useEffect(() => { if (authed) reload(); }, [authed]);
+
+  async function handleDelete(c) {
+    if (!confirm(`Usunąć kartę „${c.front}"?`)) return;
+    try { await apiDelete(c.id); reload(); } catch (e) { alert('Błąd: ' + e.message); }
+  }
+
+  async function seedModule1() {
+    if (!confirm(`Zaimportować ${SEED_M1.length} kart Modułu 1 do bazy?`)) return;
+    setSeeding(true); setSeedMsg('');
+    let ok = 0, fail = 0;
+    for (const card of SEED_M1) {
+      try { await apiCreate(card); ok++; } catch { fail++; }
+    }
+    setSeeding(false);
+    setSeedMsg(`Zaimportowano ${ok} kart${fail ? `, błędów: ${fail}` : ''}.`);
+    reload();
+  }
+
+  function logout() {
+    if (!confirm('Wylogować się?')) return;
+    localStorage.removeItem('admin_secret'); setAuthed(false);
+  }
+
+  const filtered = useMemo(() => moduleFilter === 'all' ? cards : cards.filter(c => String(c.module) === moduleFilter), [cards, moduleFilter]);
+
+  if (!authed) return <Login onLogin={() => setAuthed(true)} />;
+
+  return (
+    <>
+      <header className="adm-hdr">
+        <div className="adm-hdr-l">
+          <svg width="32" height="32" viewBox="0 0 64 64" fill="none">
+            <rect x="13" y="7" width="11" height="35" rx="5.5" fill="#fff" />
+            <rect x="18.5" y="38" width="6" height="10" rx="3" fill="#fff" />
+            <rect x="13" y="46" width="42" height="13" rx="6.5" fill="var(--flame)" />
+          </svg>
+          <div>
+            <div className="adm-hdr-title">Onboarding — treść</div>
+            <div className="adm-hdr-sub">Langer Grupa · Neon DB</div>
+          </div>
+        </div>
+        <div className="gap-2">
+          <a className="adm-hdr-btn" href="/admin-langer/" >Produkty →</a>
+          <a className="adm-hdr-btn" href="/onboarding/" target="_blank" rel="noopener">Podgląd aplikacji →</a>
+          <button className="adm-hdr-btn" onClick={logout}><ILogout s={14}/> Wyloguj</button>
+        </div>
+      </header>
+
+      <main className="adm-main">
+        <div className="adm-card">
+          <div className="flex-between">
+            <div>
+              <h2 className="adm-card-h">Karty wiedzy ({cards.length})</h2>
+              <p className="adm-card-d">Jedna karta = jedna fiszka + jedno pytanie quizu. Zmiany widoczne w aplikacji natychmiast.</p>
+            </div>
+            <div className="gap-2">
+              <select value={moduleFilter} onChange={e => setModuleFilter(e.target.value)}
+                style={{ padding: '10px 12px', border: '1.5px solid var(--line-2)', borderRadius: 'var(--r-sm)' }}>
+                <option value="all">Wszystkie moduły</option>
+                {Object.entries(MODULE_NAMES).map(([id, name]) => <option key={id} value={id}>{id} — {name}</option>)}
+              </select>
+              <button className="btn btn-ghost" onClick={reload} disabled={loading}><IRefresh s={16}/> Odśwież</button>
+              <button className="btn btn-flame" onClick={() => setAdding(true)}><IPlus s={16}/> Nowa karta</button>
+            </div>
+          </div>
+
+          {seedMsg && <div className="alert-ok">{seedMsg}</div>}
+          {err && <div className="login-err">{err}</div>}
+
+          {!loading && cards.length === 0 && !err && (
+            <div style={{ textAlign: 'center', padding: 36 }}>
+              <p className="muted" style={{ marginBottom: 16 }}>Baza jest pusta. Najpierw uruchom schemat <span className="mono">data/onboarding-schema.sql</span> w konsoli Neon, potem zaimportuj startowy Moduł 1.</p>
+              <button className="btn btn-flame" onClick={seedModule1} disabled={seeding}>
+                {seeding ? <><span className="spinner"/> Importuję...</> : `Zaimportuj startowy Moduł 1 (${SEED_M1.length} kart)`}
+              </button>
+            </div>
+          )}
+
+          {loading ? <p className="muted">Pobieram z Neon...</p> : cards.length > 0 && (
+            <div className="tbl-wrap">
+              <table className="tbl">
+                <thead><tr><th>#</th><th>Mod.</th><th>Temat</th><th>Przód</th><th>Tył</th><th>Tagi</th><th></th></tr></thead>
+                <tbody>
+                  {filtered.map(c => (
+                    <tr key={c.id}>
+                      <td className="mono">{c.id}</td>
+                      <td className="mono">{c.module}</td>
+                      <td>{c.topic || '—'}</td>
+                      <td style={{ maxWidth: 240 }}>{c.front}</td>
+                      <td style={{ maxWidth: 240 }}>{c.back}</td>
+                      <td>{(c.tags || []).map((t, i) => <span key={i} className="tag">{t}</span>)}</td>
+                      <td style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+                        <div className="gap-2" style={{ justifyContent: 'flex-end' }}>
+                          <button className="btn-icon" onClick={() => setEditing(c)} title="Edytuj" style={{ color: 'var(--cobalt)' }}><IEdit s={18}/></button>
+                          <button className="btn-icon" onClick={() => handleDelete(c)} title="Usuń"><ITrash s={18}/></button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                  {filtered.length === 0 && <tr><td colSpan="7" style={{ textAlign: 'center', padding: 30, color: 'var(--ash)' }}>Brak kart w tym module</td></tr>}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      </main>
+
+      {editing && <CardForm initial={editing} onSave={() => { setEditing(null); reload(); }} onCancel={() => setEditing(null)} />}
+      {adding && <CardForm onSave={() => { setAdding(false); reload(); }} onCancel={() => setAdding(false)} />}
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

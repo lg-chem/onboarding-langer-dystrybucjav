@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Onboarding — Langer Grupa</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+:root {
+  --flame: #F04E23; --flame-600: #D63F18; --flame-700: #B63411; --flame-tint: #FBE7DF;
+  --navy: #0E1533; --navy-800: #161E45; --navy-900: #080C22;
+  --cobalt: #1E3FB5; --cobalt-tint: #E5E9F8; --ash: #8B9199; --ash-700: #565D67;
+  --light: #EEF0F3; --paper: #F6F7F9; --white: #FFFFFF;
+  --line: #E2E5EA; --line-2: #CFD4DC;
+  --green: #16A34A; --green-tint: #DCFCE7;
+  --red: #DC2626; --red-tint: #FEE2E2;
+  --amber: #D97706; --amber-tint: #FEF3C7;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-text: 'Hanken Grotesk', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --r-sm: 6px; --r-md: 10px; --r-lg: 16px; --r-xl: 22px;
+  --e1: 0 1px 2px rgb(14 21 51 / .06);
+  --e2: 0 4px 16px -4px rgb(14 21 51 / 0.12), 0 2px 4px -1px rgb(14 21 51 / 0.06);
+  --e3: 0 20px 48px -16px rgb(14 21 51 / 0.28);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; min-height: 100vh; }
+body { background: var(--paper); color: var(--navy); font-family: var(--font-text); font-size: 15px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+a { color: inherit; text-decoration: none; }
+h1,h2,h3 { font-family: var(--font-display); letter-spacing: -0.02em; margin: 0; }
+
+/* HEADER */
+.hdr { background: var(--navy); color: #fff; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
+.hdr-l { display: flex; align-items: center; gap: 14px; cursor: pointer; }
+.hdr-title { font-family: var(--font-display); font-weight: 700; font-size: 17px; }
+.hdr-sub { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; color: rgba(255,255,255,.55); text-transform: uppercase; }
+.hdr-btn { padding: 8px 14px; border-radius: var(--r-sm); font-size: 13px; font-weight: 600; color: rgba(255,255,255,.85); border: 1px solid rgba(255,255,255,.18); display: inline-flex; align-items: center; gap: 6px; }
+.hdr-btn:hover { background: rgba(255,255,255,.08); }
+
+.main { max-width: 920px; margin: 0 auto; padding: 36px 20px 80px; }
+
+/* HERO / HOME */
+.hero { margin-bottom: 32px; }
+.hero-eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--flame); font-weight: 600; }
+.hero-h { font-size: 34px; font-weight: 700; margin: 10px 0 8px; line-height: 1.1; }
+.hero-d { color: var(--ash-700); font-size: 16px; max-width: 640px; }
+
+.mod-grid { display: grid; gap: 14px; }
+.mod-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 22px 24px; display: flex; align-items: center; gap: 20px; transition: box-shadow .15s, transform .15s, border-color .15s; text-align: left; width: 100%; }
+.mod-card.clickable:hover { box-shadow: var(--e2); transform: translateY(-2px); border-color: var(--line-2); }
+.mod-card.locked { opacity: .62; }
+.mod-num { width: 52px; height: 52px; flex: none; border-radius: var(--r-md); background: var(--navy); color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 22px; display: flex; align-items: center; justify-content: center; }
+.mod-card.active-mod .mod-num { background: var(--flame); }
+.mod-body { flex: 1; min-width: 0; }
+.mod-name { font-family: var(--font-display); font-weight: 700; font-size: 18px; }
+.mod-desc { color: var(--ash-700); font-size: 14px; margin-top: 2px; }
+.mod-right { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.pill { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; letter-spacing: .03em; text-transform: uppercase; }
+.pill-soon { background: var(--light); color: var(--ash-700); }
+.pill-info { background: var(--cobalt-tint); color: var(--cobalt); }
+.pill-active { background: var(--flame-tint); color: var(--flame-700); }
+.mod-prog { font-family: var(--font-mono); font-size: 12px; color: var(--ash-700); }
+.mod-prog-bar { width: 90px; height: 5px; background: var(--line); border-radius: 999px; overflow: hidden; margin-top: 3px; }
+.mod-prog-bar > i { display: block; height: 100%; background: var(--green); }
+
+/* GENERIC */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-display); font-weight: 600; font-size: 15px; padding: 12px 22px; border-radius: var(--r-sm); transition: background .12s, border-color .12s; white-space: nowrap; }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn-flame { background: var(--flame); color: #fff; }
+.btn-flame:hover:not(:disabled) { background: var(--flame-600); }
+.btn-navy { background: var(--navy); color: #fff; }
+.btn-navy:hover:not(:disabled) { background: var(--navy-800); }
+.btn-ghost { background: var(--white); color: var(--navy); border: 1.5px solid var(--line-2); }
+.btn-ghost:hover:not(:disabled) { border-color: var(--navy); }
+.btn-green { background: var(--green); color: #fff; }
+.btn-amber { background: var(--amber); color: #fff; }
+.backlink { display: inline-flex; align-items: center; gap: 6px; color: var(--ash-700); font-weight: 600; font-size: 14px; margin-bottom: 20px; }
+.backlink:hover { color: var(--navy); }
+.muted { color: var(--ash); }
+.spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid currentColor; border-top-color: transparent; border-radius: 50%; animation: spin .8s linear infinite; vertical-align: middle; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* MODULE HEADER */
+.mh { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 8px; }
+.mh-h { font-size: 28px; font-weight: 700; }
+.mh-d { color: var(--ash-700); margin: 4px 0 0; }
+
+/* MODE SWITCHER */
+.modes { display: flex; gap: 8px; margin: 24px 0; flex-wrap: wrap; }
+.mode-tab { padding: 10px 18px; border-radius: 999px; font-weight: 600; font-size: 14px; border: 1.5px solid var(--line-2); background: var(--white); color: var(--ash-700); display: inline-flex; align-items: center; gap: 8px; }
+.mode-tab.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+.mode-tab:hover:not(.active) { border-color: var(--navy); color: var(--navy); }
+
+/* DECK / FLASHCARD */
+.deck-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.deck-count { font-family: var(--font-mono); font-size: 13px; color: var(--ash-700); }
+.bar { height: 7px; background: var(--line); border-radius: 999px; overflow: hidden; }
+.bar > i { display: block; height: 100%; background: var(--flame); transition: width .3s; }
+
+.flip { perspective: 1600px; margin: 18px 0; }
+.flip-inner { position: relative; width: 100%; min-height: 280px; transition: transform .55s cubic-bezier(.4,.2,.2,1); transform-style: preserve-3d; cursor: pointer; }
+.flip.flipped .flip-inner { transform: rotateY(180deg); }
+.flip-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: var(--r-xl); padding: 40px 34px; display: flex; flex-direction: column; box-shadow: var(--e2); }
+.flip-front { background: var(--white); border: 1px solid var(--line); }
+.flip-back { background: var(--navy); color: #fff; transform: rotateY(180deg); }
+.face-topic { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--flame); font-weight: 600; }
+.flip-back .face-topic { color: #FF9170; }
+.face-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ash); margin-top: auto; }
+.flip-back .face-label { color: rgba(255,255,255,.45); }
+.face-text { font-family: var(--font-display); font-weight: 600; font-size: 24px; line-height: 1.3; margin: 22px 0; flex: 1; display: flex; align-items: center; }
+.flip-back .face-text { font-weight: 500; }
+.face-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: var(--light); color: var(--ash-700); }
+.flip-hint { text-align: center; font-size: 13px; color: var(--ash); margin-top: 4px; }
+
+.deck-actions { display: flex; gap: 10px; margin-top: 22px; }
+.deck-actions .btn { flex: 1; }
+.deck-nav { display: flex; justify-content: space-between; margin-top: 14px; }
+.icon-btn { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--line-2); background: var(--white); display: inline-flex; align-items: center; justify-content: center; color: var(--navy); }
+.icon-btn:hover:not(:disabled) { border-color: var(--navy); }
+.icon-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+/* DONE STATE */
+.done { background: var(--white); border: 1px solid var(--line); border-radius: var(--r-xl); padding: 48px 32px; text-align: center; box-shadow: var(--e2); }
+.done-emoji { font-size: 52px; }
+.done-h { font-size: 26px; font-weight: 700; margin: 12px 0 6px; }
+.done-d { color: var(--ash-700); max-width: 420px; margin: 0 auto 24px; }
+.done-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+/* QUIZ */
+.quiz-q { background: var(--white); border: 1px solid var(--line); border-radius: var(--r-xl); padding: 32px; box-shadow: var(--e2); }
+.quiz-topic { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--flame); font-weight: 600; }
+.quiz-text { font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.3; margin: 12px 0 24px; }
+.opt { width: 100%; text-align: left; padding: 16px 18px; border-radius: var(--r-md); border: 1.5px solid var(--line-2); background: var(--white); font-size: 15.5px; font-weight: 500; margin-bottom: 10px; transition: border-color .12s, background .12s; display: flex; align-items: center; gap: 12px; }
+.opt:hover:not(:disabled) { border-color: var(--navy); }
+.opt-mark { width: 26px; height: 26px; flex: none; border-radius: 50%; border: 1.5px solid var(--line-2); display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--ash-700); }
+.opt.correct { border-color: var(--green); background: var(--green-tint); }
+.opt.correct .opt-mark { border-color: var(--green); background: var(--green); color: #fff; }
+.opt.wrong { border-color: var(--red); background: var(--red-tint); }
+.opt.wrong .opt-mark { border-color: var(--red); background: var(--red); color: #fff; }
+.opt:disabled { cursor: default; }
+.quiz-feedback { margin-top: 16px; padding: 14px 16px; border-radius: var(--r-md); font-size: 14.5px; }
+.quiz-feedback.ok { background: var(--green-tint); color: #166534; }
+.quiz-feedback.no { background: var(--amber-tint); color: #92400e; }
+
+/* MODULE 0 — readable content */
+.prose { background: var(--white); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 30px 32px; }
+.prose + .prose { margin-top: 16px; }
+.prose h3 { font-size: 19px; margin-bottom: 12px; }
+.prose p { margin: 0 0 12px; }
+.prose ul { margin: 0 0 12px; padding-left: 20px; }
+.prose li { margin-bottom: 6px; }
+.callout { background: var(--flame-tint); border-left: 4px solid var(--flame); border-radius: var(--r-sm); padding: 14px 18px; margin: 0 0 16px; font-weight: 500; }
+table.t { width: 100%; border-collapse: collapse; font-size: 14px; margin: 8px 0 16px; }
+table.t th { background: var(--light); text-align: left; padding: 9px 12px; font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--ash-700); }
+table.t td { padding: 9px 12px; border-top: 1px solid var(--line); vertical-align: top; }
+
+.note { font-size: 13px; color: var(--ash); margin-top: 24px; text-align: center; }
+.note code { font-family: var(--font-mono); background: var(--light); padding: 1px 6px; border-radius: 4px; }
+
+@media (max-width: 640px) {
+  .hero-h { font-size: 27px; }
+  .face-text { font-size: 21px; }
+  .deck-actions { flex-direction: column; }
+}
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone@7.25.6/babel.min.js"></script>
+
+  <script type="text/babel">
+const { useState, useEffect, useMemo, useRef } = React;
+
+/* ============================================================
+   META MODUŁÓW
+   ============================================================ */
+const MODULES = [
+  { id: 0, name: 'Kontekst firmy',     desc: 'Kim jesteśmy, 3 kanały sprzedaży, plan na 2026.',                 status: 'info'   },
+  { id: 1, name: 'Produkty',           desc: 'Marka własna Langer, Soudal i reszta — fiszki i quiz.',           status: 'active' },
+  { id: 2, name: 'Segmenty klientów',  desc: 'Kanały i typy wykonawców — kto czego potrzebuje.',                status: 'soon'   },
+  { id: 3, name: 'Schematy rozmów',    desc: 'Telefon, punkt stacjonarny, obrona przed obiekcjami.',            status: 'soon'   },
+  { id: 4, name: 'Zestawy i taktyki',  desc: 'Koń trojański, pistolet za 1 zł, up-sell wydajności.',            status: 'soon'   },
+];
+
+/* ============================================================
+   DANE ZAPASOWE (gdy API/Neon jeszcze nie podłączone)
+   ============================================================ */
+const SEED_M1 = [
+  { id: 's1',  module: 1, topic: 'Zasada sprzedaży', front: 'Którą markę proponujemy domyślnie tam, gdzie mamy kontakt z klientem?', back: 'Langer (marka własna) — ma wyższą marżę niż dystrybucja.', tags: ['Strategia','Langer'] },
+  { id: 's2',  module: 1, topic: 'Zasada sprzedaży', front: 'Jaka jest rola Soudala w sprzedaży?', back: 'Kotwica zaufania — znana marka dla tych, którzy nie chcą zmieniać.', tags: ['Strategia','Soudal'] },
+  { id: 's3',  module: 1, topic: 'Piana Langer 70', front: 'Piana Langer 70 — wydajność?', back: 'Do 70 l (standard to ~45 l).', tags: ['Langer','Piany'] },
+  { id: 's4',  module: 1, topic: 'Piana Langer 70', front: 'Piana Langer 70 — czas cięcia?', back: '15–30 min.', tags: ['Langer','Piany'] },
+  { id: 's5',  module: 1, topic: 'Piana Langer 70', front: 'Piana Langer 70 — główne zastosowanie?', back: 'Montaż ościeżnic okien i drzwi.', tags: ['Langer','Piany'] },
+  { id: 's6',  module: 1, topic: 'Piana Langer 70', front: 'Piana Langer 70 — czego się nie trzyma?', back: 'PE, PP, silikonu, teflonu, tłustych podłoży.', tags: ['Langer','Piany'] },
+  { id: 's7',  module: 1, topic: 'Langer Economy Line', front: 'Langer Economy — wydajność?', back: 'Do 45 l.', tags: ['Langer','Piany'] },
+  { id: 's8',  module: 1, topic: 'Langer Economy Line', front: 'Langer Economy — wzrost objętości?', back: '~30% — niskoprężna, bez odkształceń.', tags: ['Langer','Piany'] },
+  { id: 's9',  module: 1, topic: 'Langer Economy Line', front: 'Po co mamy Langer Economy?', back: 'Najtańsze wejście marki własnej — opcja dla patrzących na cenę.', tags: ['Langer','Piany'] },
+  { id: 's10', module: 1, topic: 'Langer XL Fast', front: 'Langer XL Fast — czym różni się od Langer 70?', back: 'Szybsze wiązanie (~30 min), nastawiona na montaż stolarki.', tags: ['Langer','Piany'] },
+  { id: 's11', module: 1, topic: 'Langer XL Fast', front: 'Langer XL Fast — wydajność?', back: 'Do 65 l.', tags: ['Langer','Piany'] },
+  { id: 's12', module: 1, topic: 'Langer XL Fast', front: 'Langer XL Fast — kluczowa cecha przy ramach?', back: 'Niska rozszerzalność wtórna = minimalne naprężenia na ościeżnice.', tags: ['Langer','Piany'] },
+  { id: 's13', module: 1, topic: 'Langer 70 Zimowa', front: 'Langer 70 Zimowa — kiedy oferujemy?', back: 'Sezonowo zimą, do montażu w mrozie do −10°C.', tags: ['Langer','Sezon'] },
+  { id: 's14', module: 1, topic: 'Klej Langer Tur', front: 'Langer Tur — baza chemiczna?', back: 'MS Polimer.', tags: ['Langer','Kleje'] },
+  { id: 's15', module: 1, topic: 'Klej Langer Tur', front: 'Langer Tur — chwyt początkowy?', back: 'Do 500 kg/m² — bez podpierania.', tags: ['Langer','Kleje'] },
+  { id: 's16', module: 1, topic: 'Klej Langer Tur', front: 'Langer Tur — główna korzyść dla wykonawcy?', back: 'Koniec z podpieraniem = szybsza praca.', tags: ['Langer','Kleje'] },
+  { id: 's17', module: 1, topic: 'Klej Langer Tur', front: 'Langer Tur — wytrzymałość końcowa?', back: '22 kg/cm².', tags: ['Langer','Kleje'] },
+  { id: 's18', module: 1, topic: 'Pianoklej Langer Express 60s', front: 'Express 60s — po ilu sekundach start utwardzania?', back: '60 sekund.', tags: ['Langer','Pianokleje'] },
+  { id: 's19', module: 1, topic: 'Pianoklej Langer Express 60s', front: 'Express 60s — czas na korektę?', back: '2 minuty.', tags: ['Langer','Pianokleje'] },
+  { id: 's20', module: 1, topic: 'Pianoklej Langer Express 60s', front: 'Express 60s — max szerokość spoiny?', back: '30 mm.', tags: ['Langer','Pianokleje'] },
+  { id: 's21', module: 1, topic: 'Pianoklej Langer do styropianu', front: 'Langer do styropianu — wydajność?', back: 'Do 10 m² z puszki.', tags: ['Langer','Pianokleje'] },
+  { id: 's22', module: 1, topic: 'Pianoklej Langer do styropianu', front: 'Langer do styropianu — λ (lambda)?', back: '0,034 W/(m·K).', tags: ['Langer','Pianokleje'] },
+  { id: 's23', module: 1, topic: 'Pianoklej Langer do styropianu', front: 'Langer do styropianu — do czego głównie?', back: 'Klejenie styropianu EPS na fasadach.', tags: ['Langer','Pianokleje'] },
+  { id: 's24', module: 1, topic: 'Pistolet T400 PTFE', front: 'Pistolet T400 — dlaczego proponować przy piankach?', back: 'Kontrola aplikacji + oszczędność piany; naturalny dodatek do koszyka.', tags: ['Akcesoria'] },
+  { id: 's25', module: 1, topic: 'Soudal — piany', front: 'Które piany Soudal najwięcej schodzą w punktach?', back: 'Soudal Classic i Soudal Yellow.', tags: ['Soudal','Piany'] },
+  { id: 's26', module: 1, topic: 'Distyk', front: 'Jak pozycjonujemy markę Distyk?', back: 'Tańsza alternatywa dla Soudala (silikony, akryle) — wyższa marża.', tags: ['Distyk'] },
+];
+
+/* ============================================================
+   IKONY
+   ============================================================ */
+const Svg = ({ s = 18, children, style }) => (
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" style={style}>{children}</svg>
+);
+const IBack  = (p) => <Svg {...p}><path d="M19 12H5M12 19l-7-7 7-7"/></Svg>;
+const IArrowL= (p) => <Svg {...p}><path d="M15 18l-6-6 6-6"/></Svg>;
+const IArrowR= (p) => <Svg {...p}><path d="M9 18l6-6-6-6"/></Svg>;
+const ICards = (p) => <Svg {...p}><rect x="2" y="7" width="14" height="14" rx="2"/><path d="M8 3h12a2 2 0 012 2v12"/></Svg>;
+const IQuiz  = (p) => <Svg {...p}><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 015.8 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></Svg>;
+const ICheck = (p) => <Svg {...p}><path d="M20 6L9 17l-5-5"/></Svg>;
+const IRepeat= (p) => <Svg {...p}><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></Svg>;
+
+/* ============================================================
+   API + POSTĘP (localStorage)
+   ============================================================ */
+async function fetchCards(module) {
+  const res = await fetch(`/api/onboarding/cards?module=${module}`);
+  if (!res.ok) throw new Error('API ' + res.status);
+  const data = await res.json();
+  if (!Array.isArray(data) || data.length === 0) throw new Error('pusto');
+  return data;
+}
+
+const PROGRESS_KEY = (m) => `lg_onb_m${m}`;
+function loadProgress(m) {
+  try { return JSON.parse(localStorage.getItem(PROGRESS_KEY(m)) || '{}'); } catch { return {}; }
+}
+function saveProgress(m, obj) {
+  try { localStorage.setItem(PROGRESS_KEY(m), JSON.stringify(obj)); } catch {}
+}
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/* ============================================================
+   LOGO
+   ============================================================ */
+function Logo({ light }) {
+  return (
+    <svg width="30" height="30" viewBox="0 0 64 64" fill="none">
+      <rect x="13" y="7" width="11" height="35" rx="5.5" fill={light ? '#fff' : 'var(--navy)'} />
+      <rect x="18.5" y="38" width="6" height="10" rx="3" fill={light ? '#fff' : 'var(--navy)'} />
+      <rect x="13" y="46" width="42" height="13" rx="6.5" fill="var(--flame)" />
+    </svg>
+  );
+}
+
+/* ============================================================
+   EKRAN GŁÓWNY
+   ============================================================ */
+function Home({ onOpen, m1stats }) {
+  return (
+    <div className="main">
+      <div className="hero">
+        <div className="hero-eyebrow">Onboarding · Langer Grupa</div>
+        <h1 className="hero-h">Witaj w zespole 👋</h1>
+        <p className="hero-d">
+          To Twoje centrum wdrożenia. Przejdziesz przez wiedzę o firmie, produktach,
+          klientach i sposobie sprzedaży — krok po kroku, z fiszkami i quizami.
+          Zacznij od kontekstu, potem opanuj produkty.
+        </p>
+      </div>
+
+      <div className="mod-grid">
+        {MODULES.map(m => {
+          const clickable = m.status !== 'soon';
+          const isActive = m.status === 'active';
+          return (
+            <button
+              key={m.id}
+              className={'mod-card' + (clickable ? ' clickable' : ' locked') + (isActive ? ' active-mod' : '')}
+              onClick={() => clickable && onOpen(m.id)}
+              disabled={!clickable}
+            >
+              <div className="mod-num">{m.id}</div>
+              <div className="mod-body">
+                <div className="mod-name">{m.name}</div>
+                <div className="mod-desc">{m.desc}</div>
+              </div>
+              <div className="mod-right">
+                {m.status === 'soon'   && <span className="pill pill-soon">Wkrótce</span>}
+                {m.status === 'info'   && <span className="pill pill-info">Do przeczytania</span>}
+                {m.status === 'active' && <span className="pill pill-active">Start tutaj</span>}
+                {isActive && m1stats && m1stats.total > 0 && (
+                  <>
+                    <span className="mod-prog">{m1stats.known}/{m1stats.total} opanowane</span>
+                    <span className="mod-prog-bar"><i style={{ width: `${Math.round(m1stats.known / m1stats.total * 100)}%` }} /></span>
+                  </>
+                )}
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      <p className="note">
+        Postępy w fiszkach zapisują się w tej przeglądarce. Treść modułów uzupełnia
+        zespół przez panel <code>/admin-langer/onboarding.html</code>.
+      </p>
+    </div>
+  );
+}
+
+/* ============================================================
+   MODUŁ 0 — KONTEKST (treść do czytania)
+   ============================================================ */
+function Module0({ onBack }) {
+  return (
+    <div className="main">
+      <button className="backlink" onClick={onBack}><IBack s={16}/> Wszystkie moduły</button>
+      <div className="mh"><div><div className="mh-h">Moduł 0 — Kontekst firmy</div>
+        <p className="mh-d">Zanim ruszysz w produkty — zrozum, jak działa firma i co sprzedajemy.</p></div></div>
+
+      <div className="prose" style={{ marginTop: 24 }}>
+        <h3>Kim jesteśmy</h3>
+        <p>Langer Grupa to chemia budowlana w dwóch trybach:</p>
+        <ul>
+          <li><b>Dystrybutor marek zewnętrznych</b> — Soudal, Distyk, Champion, Technicqll, Bostik.</li>
+          <li><b>Producent marki własnej Langer</b> — pianki, kleje, pianokleje.</li>
+        </ul>
+        <div className="callout">
+          Najważniejsza zasada: marka własna <b>Langer ma wyższą marżę</b> niż dystrybucja.
+          Tam, gdzie mamy kontakt z klientem, <b>domyślnie proponujemy Langer.</b>
+          Soudal = „kotwica zaufania" dla tych, którzy nie chcą zmieniać.
+        </div>
+      </div>
+
+      <div className="prose">
+        <h3>3 kanały sprzedaży</h3>
+        <table className="t">
+          <thead><tr><th>Kanał</th><th>Typ</th><th>Klient</th><th>Rola handlowca</th></tr></thead>
+          <tbody>
+            <tr><td><b>klejpan.pl</b><br/><span className="muted">od 2021</span></td><td>sklep online</td><td>B2C/B2B mieszany</td><td>brak — klient kupuje sam</td></tr>
+            <tr><td><b>zapianowany.pl</b><br/><span className="muted">od 2024</span></td><td>online + lead z FB + telefon</td><td>wykonawcy, firmy montażowe</td><td><b>kluczowa</b> — telefon, oferta</td></tr>
+            <tr><td><b>Langer Dystrybucja</b><br/><span className="muted">od 01.07.2026</span></td><td>stacjonarny B2B</td><td>punkty handlowe / składy</td><td><b>kluczowa</b> — relacja, obsługa punktu</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div className="prose">
+        <h3>Kontekst 2026</h3>
+        <p>Langer Dystrybucja wchodzi na Mazowsze w miejsce <b>Budmy Chemii</b> (wycofuje się do 01.07.2026).
+        To <b>sukcesja, nie automatyczne przejęcie</b> — klientów trzeba utrzymać relacyjnie.</p>
+      </div>
+
+      <div style={{ textAlign: 'center', marginTop: 28 }}>
+        <button className="btn btn-flame" onClick={onBack}>Rozumiem — przejdź do modułów <IArrowR s={16}/></button>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   MODUŁ „WKRÓTCE"
+   ============================================================ */
+function ModuleSoon({ mod, onBack }) {
+  return (
+    <div className="main">
+      <button className="backlink" onClick={onBack}><IBack s={16}/> Wszystkie moduły</button>
+      <div className="done" style={{ marginTop: 40 }}>
+        <div className="done-emoji">🚧</div>
+        <div className="done-h">Moduł {mod.id} — {mod.name}</div>
+        <p className="done-d">Ten moduł jest w przygotowaniu. Treść dorzucamy wkrótce — wróć tu niedługo.</p>
+        <div className="done-actions"><button className="btn btn-ghost" onClick={onBack}>Wróć do modułów</button></div>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   FISZKI
+   ============================================================ */
+function Flashcards({ cards, module }) {
+  const [progress, setProgress] = useState(() => loadProgress(module));
+  const [reviewMode, setReviewMode] = useState(false); // tylko "do powtórki"
+  // talia (indeksy kart) jest migawką ustawianą przy starcie — nie przelicza się
+  // reaktywnie z postępu, żeby oznaczenie karty nie przesuwało następnych
+  const [deck, setDeck] = useState(() => cards.map((_, i) => i));
+  const [pos, setPos] = useState(0);
+  const [flipped, setFlipped] = useState(false);
+
+  const atEnd = pos >= deck.length;
+  const card = atEnd ? null : cards[deck[pos]];
+
+  function mark(status) {
+    if (!card) return;
+    const next = { ...progress, [card.id]: status };
+    setProgress(next);
+    saveProgress(module, next);
+    go(1);
+  }
+  function go(delta) {
+    setFlipped(false);
+    setPos(p => Math.max(0, Math.min(deck.length, p + delta)));
+  }
+  function restart(review) {
+    const base = shuffle(cards.map((_, i) => i));
+    const next = review ? base.filter(i => progress[cards[i].id] !== 'known') : base;
+    setDeck(next.length ? next : base);
+    setReviewMode(review);
+    setPos(0);
+    setFlipped(false);
+  }
+
+  const knownCount = cards.filter(c => progress[c.id] === 'known').length;
+
+  if (atEnd) {
+    const allKnown = knownCount === cards.length;
+    return (
+      <div className="done">
+        <div className="done-emoji">{allKnown ? '🏆' : '✅'}</div>
+        <div className="done-h">{allKnown ? 'Komplet! Znasz wszystkie fiszki.' : 'Koniec talii'}</div>
+        <p className="done-d">
+          Opanowane: <b>{knownCount} z {cards.length}</b>.
+          {!allKnown && ' Powtórz te oznaczone „jeszcze raz", aż dobijesz do kompletu.'}
+        </p>
+        <div className="done-actions">
+          {!allKnown && <button className="btn btn-flame" onClick={() => restart(true)}><IRepeat s={16}/> Powtórz trudne</button>}
+          <button className="btn btn-ghost" onClick={() => restart(false)}>Od nowa, wszystkie</button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div className="deck-top">
+        <span className="deck-count">Karta {pos + 1} / {deck.length}{reviewMode ? ' · powtórka' : ''}</span>
+        <span className="deck-count">{knownCount}/{cards.length} opanowane</span>
+      </div>
+      <div className="bar"><i style={{ width: `${(pos / deck.length) * 100}%` }} /></div>
+
+      <div className={'flip' + (flipped ? ' flipped' : '')}>
+        <div className="flip-inner" onClick={() => setFlipped(f => !f)}>
+          <div className="flip-face flip-front">
+            <div className="face-topic">{card.topic || 'Pytanie'}</div>
+            <div className="face-text">{card.front}</div>
+            <div className="face-tags">{(card.tags || []).map((t, i) => <span key={i} className="tag">{t}</span>)}</div>
+            <div className="face-label">Pytanie — kliknij, by odwrócić</div>
+          </div>
+          <div className="flip-face flip-back">
+            <div className="face-topic">{card.topic || 'Odpowiedź'}</div>
+            <div className="face-text">{card.back}</div>
+            <div className="face-label">Odpowiedź</div>
+          </div>
+        </div>
+      </div>
+      <p className="flip-hint">Kliknij kartę, żeby zobaczyć odpowiedź</p>
+
+      <div className="deck-actions">
+        <button className="btn btn-amber" onClick={() => mark('again')}><IRepeat s={16}/> Jeszcze raz</button>
+        <button className="btn btn-green" onClick={() => mark('known')}><ICheck s={16}/> Umiem</button>
+      </div>
+      <div className="deck-nav">
+        <button className="icon-btn" onClick={() => go(-1)} disabled={pos === 0}><IArrowL s={18}/></button>
+        <button className="icon-btn" onClick={() => go(1)}><IArrowR s={18}/></button>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   QUIZ (generowany z kart)
+   ============================================================ */
+function buildQuiz(cards, count) {
+  const pool = shuffle(cards).slice(0, Math.min(count, cards.length));
+  return pool.map(c => {
+    const distractors = shuffle(cards.filter(x => x.id !== c.id && x.back !== c.back))
+      .slice(0, 3).map(x => x.back);
+    const options = shuffle([c.back, ...distractors]);
+    return { topic: c.topic, question: c.front, options, correct: c.back };
+  });
+}
+
+function Quiz({ cards }) {
+  const QUIZ_LEN = Math.min(10, cards.length);
+  const [questions, setQuestions] = useState(() => buildQuiz(cards, QUIZ_LEN));
+  const [pos, setPos] = useState(0);
+  const [picked, setPicked] = useState(null);
+  const [score, setScore] = useState(0);
+  const [finished, setFinished] = useState(false);
+
+  const q = questions[pos];
+
+  function pick(opt) {
+    if (picked !== null) return;
+    setPicked(opt);
+    if (opt === q.correct) setScore(s => s + 1);
+  }
+  function next() {
+    if (pos + 1 >= questions.length) { setFinished(true); return; }
+    setPos(p => p + 1);
+    setPicked(null);
+  }
+  function restart() {
+    setQuestions(buildQuiz(cards, QUIZ_LEN));
+    setPos(0); setPicked(null); setScore(0); setFinished(false);
+  }
+
+  if (finished) {
+    const pct = Math.round(score / questions.length * 100);
+    const emoji = pct === 100 ? '🏆' : pct >= 70 ? '👏' : '💪';
+    const msg = pct === 100 ? 'Perfekcyjnie! Materiał opanowany.'
+      : pct >= 70 ? 'Dobry wynik — jeszcze chwila powtórki i komplet.'
+      : 'Wróć do fiszek i spróbuj jeszcze raz — szybko pójdzie.';
+    return (
+      <div className="done">
+        <div className="done-emoji">{emoji}</div>
+        <div className="done-h">{score} / {questions.length} poprawnych ({pct}%)</div>
+        <p className="done-d">{msg}</p>
+        <div className="done-actions">
+          <button className="btn btn-flame" onClick={restart}><IRepeat s={16}/> Nowy quiz</button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div className="deck-top">
+        <span className="deck-count">Pytanie {pos + 1} / {questions.length}</span>
+        <span className="deck-count">Wynik: {score}</span>
+      </div>
+      <div className="bar"><i style={{ width: `${(pos / questions.length) * 100}%` }} /></div>
+
+      <div className="quiz-q" style={{ marginTop: 16 }}>
+        <div className="quiz-topic">{q.topic}</div>
+        <div className="quiz-text">{q.question}</div>
+        {q.options.map((opt, i) => {
+          let cls = 'opt';
+          if (picked !== null) {
+            if (opt === q.correct) cls += ' correct';
+            else if (opt === picked) cls += ' wrong';
+          }
+          return (
+            <button key={i} className={cls} onClick={() => pick(opt)} disabled={picked !== null}>
+              <span className="opt-mark">{String.fromCharCode(65 + i)}</span>
+              <span>{opt}</span>
+            </button>
+          );
+        })}
+
+        {picked !== null && (
+          <>
+            <div className={'quiz-feedback ' + (picked === q.correct ? 'ok' : 'no')}>
+              {picked === q.correct ? '✓ Dobrze!' : <>✗ Poprawna odpowiedź: <b>{q.correct}</b></>}
+            </div>
+            <div style={{ textAlign: 'right', marginTop: 16 }}>
+              <button className="btn btn-navy" onClick={next}>
+                {pos + 1 >= questions.length ? 'Zobacz wynik' : 'Następne'} <IArrowR s={16}/>
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   MODUŁ 1 — PRODUKTY (fiszki + quiz)
+   ============================================================ */
+function Module1({ onBack, onStats }) {
+  const [cards, setCards] = useState(null);
+  const [usingSeed, setUsingSeed] = useState(false);
+  const [mode, setMode] = useState('cards');
+
+  useEffect(() => {
+    let alive = true;
+    fetchCards(1)
+      .then(data => { if (alive) { setCards(data); setUsingSeed(false); } })
+      .catch(() => { if (alive) { setCards(SEED_M1); setUsingSeed(true); } });
+    return () => { alive = false; };
+  }, []);
+
+  // raportuj postęp na ekran główny
+  useEffect(() => {
+    if (!cards) return;
+    const prog = loadProgress(1);
+    const known = cards.filter(c => prog[c.id] === 'known').length;
+    onStats({ known, total: cards.length });
+  }, [cards, mode]);
+
+  if (!cards) {
+    return <div className="main"><p className="muted" style={{ textAlign: 'center', padding: 60 }}><span className="spinner"/> Ładuję materiały…</p></div>;
+  }
+
+  return (
+    <div className="main">
+      <button className="backlink" onClick={onBack}><IBack s={16}/> Wszystkie moduły</button>
+      <div className="mh">
+        <div>
+          <div className="mh-h">Moduł 1 — Produkty</div>
+          <p className="mh-d">Opanuj kluczowe parametry i argumenty sprzedażowe. {cards.length} kart wiedzy.</p>
+        </div>
+      </div>
+
+      <div className="modes">
+        <button className={'mode-tab' + (mode === 'cards' ? ' active' : '')} onClick={() => setMode('cards')}><ICards s={16}/> Fiszki</button>
+        <button className={'mode-tab' + (mode === 'quiz' ? ' active' : '')} onClick={() => setMode('quiz')}><IQuiz s={16}/> Quiz</button>
+      </div>
+
+      {mode === 'cards' && <Flashcards key="cards" cards={cards} module={1} />}
+      {mode === 'quiz'  && <Quiz key="quiz" cards={cards} />}
+
+      {usingSeed && (
+        <p className="note">
+          Tryb demo — pokazuję wbudowane fiszki. Po uruchomieniu schematu Neon
+          (<code>data/onboarding-schema.sql</code>) i imporcie w panelu, treść pójdzie z bazy.
+        </p>
+      )}
+    </div>
+  );
+}
+
+/* ============================================================
+   APP
+   ============================================================ */
+function App() {
+  const [view, setView] = useState(0);     // 'home' | numer modułu
+  const [home, setHome] = useState(true);
+  const [m1stats, setM1stats] = useState(null);
+
+  function open(id) { setHome(false); setView(id); window.scrollTo(0, 0); }
+  function back()    { setHome(true); window.scrollTo(0, 0); }
+
+  const mod = MODULES.find(m => m.id === view);
+
+  return (
+    <>
+      <header className="hdr">
+        <div className="hdr-l" onClick={back}>
+          <Logo light />
+          <div>
+            <div className="hdr-title">Onboarding</div>
+            <div className="hdr-sub">Langer Grupa</div>
+          </div>
+        </div>
+        <a className="hdr-btn" href="/" target="_blank" rel="noopener">Strona firmowa →</a>
+      </header>
+
+      {home && <Home onOpen={open} m1stats={m1stats} />}
+      {!home && view === 0 && <Module0 onBack={back} />}
+      {!home && view === 1 && <Module1 onBack={back} onStats={setM1stats} />}
+      {!home && mod && mod.status === 'soon' && <ModuleSoon mod={mod} onBack={back} />}
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
