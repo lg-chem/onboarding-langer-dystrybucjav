@@ -303,7 +303,7 @@ const CONTENT = {
       ] },
       { prose: [
         { h: 'Marka własna LANGER' },
-        { p: 'Siedem produktów, które musisz znać na pamięć. Przy każdym najważniejsze: **na czym pchasz** (zielona ramka) i **czego unikać** (pomarańczowa).' },
+        { p: 'Siedem produktów, które musisz znać na pamięć. Przy każdym najważniejsze: **wyróżniki** (czym przekonać klienta) i **czego unikać** (ograniczenia produktu).' },
       ] },
       { card: { star: true, badge: 'Marka własna', name: 'Piana Langer 70', meta: '870 ml · 26,99 zł brutto · kod KAT01118',
         img: 'https://sklep361229.shoparena.pl/console/image/resize/nowatermark/1/type/productGfx/image/503.png',
@@ -673,7 +673,7 @@ function ProductCard({ c }) {
       <div className="pc-rows">
         {c.summary && <div className="pc-summary">{rich(c.summary)}</div>}
         {c.use && <div><div className="pc-label">Do czego</div><Chips text={c.use} /></div>}
-        {c.push && <div className="pc-push"><div className="pc-label">💪 Na czym pchasz</div><Chips text={c.push} /></div>}
+        {c.push && <div className="pc-push"><div className="pc-label">🎯 Wyróżniki — czym przekonać klienta</div><Chips text={c.push} /></div>}
         {c.specs && <div><div className="pc-label">Dane techniczne</div><Chips text={c.specs} /></div>}
         {c.limits && <div className="pc-limit"><div className="pc-label">⚠️ Uwaga / ograniczenia</div><Chips text={c.limits} /></div>}
         {c.remember && <div className="pc-remember"><div className="pc-label">⭐ Zapamiętaj</div>{rich(c.remember)}</div>}
