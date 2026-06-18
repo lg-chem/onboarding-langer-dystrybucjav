@@ -122,6 +122,43 @@ Zmień liczby i opisy zgodnie ze swoją rzeczywistością.
 
 Od tej chwili każdy commit w repo → strona aktualizuje się automatycznie.
 
+### Świeży projekt: baza Neon + zmienne środowiskowe
+
+Strona i panele czytają produkty z bazy (`GET /api/products`), więc **na nowym
+projekcie trzeba podłączyć bazę, inaczej lista produktów będzie pusta.**
+
+1. **Baza:** w Vercelu **Storage → Create → Neon** (albo własny Neon) — Vercel sam
+   doda zmienną **`DATABASE_URL`**.
+2. **Tabele + dane startowe:** w Neon → **SQL Editor** wklej **całą zawartość
+   `data/setup.sql`** i uruchom raz. Tworzy tabele `products` i `onboarding_cards`
+   oraz wgrywa dane startowe (22 produkty + 26 kart Modułu 1). Plik jest bezpieczny
+   do ponownego uruchomienia (nie duplikuje danych).
+3. **Sekret admina:** w **Settings → Environment Variables** dodaj **`ADMIN_SECRET`**
+   = dowolny długi losowy ciąg. To hasło do obu paneli (`/admin-langer/` i
+   `/admin-langer/onboarding.html`). Po dodaniu zmiennych zrób **Redeploy**.
+
+Po tym: strona pokazuje produkty, `/onboarding/` ciągnie karty z bazy, a treść
+edytujesz w panelach. (Zamiast `setup.sql` możesz też uruchomić sam
+`data/onboarding-schema.sql` i zaimportować karty przyciskiem w panelu onboardingu.)
+
+### Onboarding jako strona startowa + logowanie
+
+Na czas, gdy strona firmowa to jeszcze demo, **adres główny `/` przekierowuje do
+`/onboarding/`** (ustawione w `vercel.json` jako tymczasowy redirect). Demo strony
+nadal jest dostępne pod `/index.html` — żeby przywrócić je jako stronę startową,
+usuń sekcję `redirects` z `vercel.json`.
+
+Onboarding jest **chroniony wspólnym kodem dostępu**. Ustaw w **Settings →
+Environment Variables** zmienną **`ONBOARDING_CODE`** = kod, który rozdasz
+pracownikom. Weryfikacja jest po stronie serwera (`/api/onboarding/auth`), kod nie
+trafia do kodu front-endu. Gdy zmiennej nie ma, onboarding jest otwarty (bez bramki).
+
+| Zmienna | Po co |
+|---|---|
+| `DATABASE_URL` | połączenie z Neon (produkty + karty onboardingu) |
+| `ADMIN_SECRET` | logowanie do paneli admina (`/admin-langer/`) |
+| `ONBOARDING_CODE` | wspólny kod dostępu do nauki na `/onboarding/` |
+
 ### Własna domena
 
 Po wdrożeniu w panelu Vercela: **Settings → Domains → Add** i podaj swoją domenę (np. `langerdystrybucja.pl`). Vercel pokaże jakie rekordy DNS ustawić u Twojego rejestratora.
@@ -134,10 +171,15 @@ Osobna aplikacja szkoleniowa pod adresem **`/onboarding/`** — wprowadza nowych
 handlowców w firmę, produkty, segmenty i sposób sprzedaży. Plan: 5 modułów
 (0 Kontekst → 1 Produkty → 2 Segmenty → 3 Rozmowy → 4 Zestawy).
 
-**Status: Moduł 1 (Produkty) działa w pełni** — fiszki z obracaniem, system
-„umiem / jeszcze raz" (postęp zapisywany w przeglądarce) oraz quiz generowany
-z tych samych kart. Moduł 0 to treść do przeczytania; moduły 2–4 są oznaczone
-„Wkrótce". Aplikacja ma wbudowany komplet kart (tryb demo), więc działa nawet
+**Każdy moduł ma materiały do nauki.** Moduł 0 (Kontekst) i moduły 2–4
+(Segmenty, Rozmowy, Zestawy) to lekcje do czytania — karty produktowe, tabele,
+schematy rozmów krok po kroku i obrona przed obiekcjami (treść z Vademecum,
+wpisana w `onboarding/index.html` w strukturze `CONTENT`). **Moduł 1 (Produkty)**
+ma dodatkowo trzy tryby: **Materiały** (karty produktowe), **Fiszki** (obracane,
+z systemem „umiem / jeszcze raz", postęp w przeglądarce) i **Quiz** (generowany
+z tych samych kart). Logika nauki: najpierw materiały → fiszki → quiz.
+
+Fiszki/quiz Modułu 1 mają wbudowany komplet kart (tryb demo), więc działają nawet
 zanim podłączysz bazę.
 
 **Treść w bazie + panel admina:**

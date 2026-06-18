@@ -1,4 +1,7 @@
 {
   "framework": null,
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "redirects": [
+    { "source": "/", "destination": "/onboarding/", "permanent": false }
+  ]
 }

@@ -158,8 +158,68 @@ table.t { width: 100%; border-collapse: collapse; font-size: 14px; margin: 8px 0
 table.t th { background: var(--light); text-align: left; padding: 9px 12px; font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--ash-700); }
 table.t td { padding: 9px 12px; border-top: 1px solid var(--line); vertical-align: top; }
 
+/* LEKCJE / NAUKA */
+.lesson-wrap { display: flex; flex-direction: column; gap: 16px; }
+.lesson h3 { font-size: 20px; margin: 4px 0 0; }
+.lesson h4 { font-family: var(--font-display); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--ash-700); margin: 8px 0 -2px; }
+.lesson p { margin: 0; }
+.lesson ul, .lesson ol { margin: 0; padding-left: 20px; }
+.lesson li { margin-bottom: 7px; }
+.lesson .note { text-align: left; margin: 0; }
+
+/* KARTA PRODUKTU (materiały) */
+.pcard { background: var(--white); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 22px 24px; box-shadow: var(--e1); }
+.pcard.star { border-color: var(--flame); box-shadow: 0 0 0 1px var(--flame), var(--e1); }
+.pcard-top { display: flex; align-items: flex-start; gap: 14px; flex-wrap: wrap; }
+.pcard-head { flex: 1; min-width: 0; }
+.pcard-thumb { flex: none; width: 92px; height: 92px; border-radius: var(--r-md); background: var(--light); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; padding: 8px; }
+.pcard-thumb img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.pcard-name { font-family: var(--font-display); font-weight: 700; font-size: 18px; line-height: 1.2; }
+.pcard-meta { font-family: var(--font-mono); font-size: 12px; color: var(--ash-700); margin-top: 5px; }
+.pcard-badge { font-size: 11px; font-weight: 700; padding: 4px 11px; border-radius: 999px; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
+.badge-own { background: var(--cobalt-tint); color: var(--cobalt); }
+.badge-best { background: var(--flame-tint); color: var(--flame-700); }
+.pc-rows { margin-top: 16px; display: flex; flex-direction: column; gap: 14px; font-size: 14.5px; }
+.pc-label { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--flame); font-weight: 600; margin-bottom: 7px; }
+.pc-summary { font-size: 15.5px; line-height: 1.5; color: var(--ink, #1f2937); }
+.pc-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+.chip { display: inline-block; font-size: 13px; line-height: 1.35; padding: 5px 12px; border-radius: 999px; background: var(--light); border: 1px solid var(--line); }
+.chip strong { font-weight: 700; }
+.pc-push { background: var(--flame-tint); border-radius: var(--r-sm); padding: 13px 14px; }
+.pc-push .chip { background: #fff; border-color: #ffd1c2; }
+.pc-limit { background: var(--amber-tint); border-radius: var(--r-sm); padding: 13px 14px; color: #7c4a03; }
+.pc-limit .chip { background: #fff; border-color: #f1dcab; color: #7c4a03; }
+.pc-limit .pc-label { color: #b45309; }
+.pc-remember { background: var(--navy); color: #fff; border-radius: var(--r-sm); padding: 12px 14px; }
+.pc-remember .pc-label { color: #FF9170; }
+
+/* KROKI ROZMOWY */
+.steps { display: flex; flex-direction: column; }
+.step { display: flex; gap: 16px; padding-bottom: 18px; position: relative; }
+.step:not(:last-child)::before { content: ''; position: absolute; left: 17px; top: 40px; bottom: 0; width: 2px; background: var(--line); }
+.step-n { width: 36px; height: 36px; flex: none; border-radius: 50%; background: var(--flame); color: #fff; font-family: var(--font-display); font-weight: 700; display: flex; align-items: center; justify-content: center; z-index: 1; }
+.step-b { flex: 1; padding-top: 5px; }
+.step-t { font-family: var(--font-display); font-weight: 700; font-size: 16px; }
+.step-x { color: var(--ash-700); margin-top: 4px; }
+.quote { border-left: 3px solid var(--cobalt); background: var(--cobalt-tint); padding: 9px 14px; border-radius: var(--r-sm); font-style: italic; margin-top: 8px; }
+
+/* OBIEKCJE */
+.obj { border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+.obj + .obj { margin-top: 10px; }
+.obj-q { background: var(--red-tint); color: #991b1b; padding: 11px 16px; font-weight: 700; }
+.obj-a { padding: 11px 16px; }
+
 .note { font-size: 13px; color: var(--ash); margin-top: 24px; text-align: center; }
 .note code { font-family: var(--font-mono); background: var(--light); padding: 1px 6px; border-radius: 4px; }
+
+/* LOGOWANIE */
+.auth-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; background: linear-gradient(180deg, var(--navy) 0%, var(--navy-900) 100%); }
+.auth-card { background: var(--white); border-radius: var(--r-xl); padding: 40px 36px; max-width: 400px; width: 100%; box-shadow: var(--e3); text-align: center; }
+.auth-h { font-family: var(--font-display); font-weight: 700; font-size: 24px; letter-spacing: -0.02em; margin: 18px 0 6px; }
+.auth-d { color: var(--ash-700); font-size: 14.5px; margin: 0 0 22px; line-height: 1.45; }
+.auth-input { width: 100%; font-size: 16px; padding: 13px 14px; border: 1.5px solid var(--line-2); border-radius: var(--r-sm); text-align: center; letter-spacing: .08em; }
+.auth-input:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(14,21,51,.08); }
+.auth-err { background: var(--red-tint); color: var(--red); padding: 10px 14px; border-radius: var(--r-sm); font-size: 13.5px; margin-bottom: 14px; }
 
 @media (max-width: 640px) {
   .hero-h { font-size: 27px; }
@@ -183,10 +243,10 @@ const { useState, useEffect, useMemo, useRef } = React;
    ============================================================ */
 const MODULES = [
   { id: 0, name: 'Kontekst firmy',     desc: 'Kim jesteśmy, 3 kanały sprzedaży, plan na 2026.',                 status: 'info'   },
-  { id: 1, name: 'Produkty',           desc: 'Marka własna Langer, Soudal i reszta — fiszki i quiz.',           status: 'active' },
-  { id: 2, name: 'Segmenty klientów',  desc: 'Kanały i typy wykonawców — kto czego potrzebuje.',                status: 'soon'   },
-  { id: 3, name: 'Schematy rozmów',    desc: 'Telefon, punkt stacjonarny, obrona przed obiekcjami.',            status: 'soon'   },
-  { id: 4, name: 'Zestawy i taktyki',  desc: 'Koń trojański, pistolet za 1 zł, up-sell wydajności.',            status: 'soon'   },
+  { id: 1, name: 'Produkty',           desc: 'Karty produktowe, fiszki i quiz.',                                status: 'active' },
+  { id: 2, name: 'Segmenty klientów',  desc: 'Kanały i typy wykonawców — kto czego potrzebuje.',                status: 'read'   },
+  { id: 3, name: 'Schematy rozmów',    desc: 'Telefon, punkt stacjonarny, obrona przed obiekcjami.',            status: 'read'   },
+  { id: 4, name: 'Zestawy i taktyki',  desc: 'Koń trojański, pistolet za 1 zł, up-sell wydajności.',            status: 'read'   },
 ];
 
 /* ============================================================
@@ -222,6 +282,430 @@ const SEED_M1 = [
 ];
 
 /* ============================================================
+   MATERIAŁY DO NAUKI (treść lekcji per moduł)
+   Sekcja = biała karta z blokami {prose:[...]}, albo karta produktu {card:{...}}
+   ============================================================ */
+const CONTENT = {
+  1: {
+    lead: 'Marki, które sprzedajemy, i produkty, które musisz znać. Najpierw marka własna Langer — ją pchamy w pierwszej kolejności.',
+    sections: [
+      { prose: [
+        { h: 'Mapa marek' },
+        { table: { head: ['Marka', 'Typ', 'Jak pozycjonujemy'], rows: [
+          ['**Langer**', 'własna', 'Pianki, kleje, pianokleje. **Pchamy w pierwszej kolejności.**'],
+          ['**Soudal**', 'zewnętrzna', 'Trzon: piany, silikony, akryle, kleje. „Kotwica zaufania".'],
+          ['**Distyk**', 'zewnętrzna', 'Silikony, akryle — **tańsza alternatywa** dla Soudala.'],
+          ['**Champion**', 'zewnętrzna', 'Spreje — uniwersalne, żaroodporne, autoacryl.'],
+          ['**Technicqll**', 'zewnętrzna', 'Drobne produkty naprawcze — pod punkty handlowe.'],
+          ['**Bostik**', 'zewnętrzna', 'Mamut Glue (klej montażowy).'],
+        ] } },
+        { callout: 'Zasada nadrzędna: Langer ma **wyższą marżę** niż dystrybucja. Tam, gdzie mamy kontakt z klientem — **domyślnie proponujemy Langer.** Soudal to „kotwica zaufania" dla tych, którzy nie chcą zmieniać.' },
+      ] },
+      { prose: [
+        { h: 'Marka własna LANGER' },
+        { p: 'Siedem produktów, które musisz znać na pamięć. Przy każdym najważniejsze: **wyróżniki** (czym przekonać klienta) i **czego unikać** (ograniczenia produktu).' },
+      ] },
+      { card: { star: true, badge: 'Marka własna', name: 'Piana Langer 70', meta: '870 ml · 26,99 zł brutto · kod KAT01118',
+        img: 'https://sklep361229.shoparena.pl/console/image/resize/nowatermark/1/type/productGfx/image/503.png',
+        summary: 'Profesjonalna piana pistoletowa o najwyższej wydajności (do 70 l), niskoprężna. Flagowy produkt.',
+        use: 'Montaż ościeżnic okien i drzwi, wypełnianie przestrzeni montażowych, izolacja akustyczna i termiczna, klejenie parapetów, izolacje dachowe, bruzdy na rury i przewody.',
+        push: 'Do 70 l (vs standard ~45 l) · niskoprężna = bez wypaczania konstrukcji · stabilna wymiarowo · opakowanie 870 ml = mniej wymian puszki · dobra przyczepność (mur, beton, drewno, styropian).',
+        specs: 'Baza poliuretan · gęstość 25 kg/m³ · przewodność 30–35 mW/mK · odporność −40 do +90°C · temp. aplikacji +6 do +35°C · czas cięcia 15–30 min · pełne utwardzenie 2–24 h · trwałość 24 mies.',
+        limits: 'Nie odporna na UV (zabezpieczyć tynkiem/farbą) · nie trzyma się PE, PP, silikonu, teflonu, tłustych podłoży.',
+        remember: 'Wydajność do 70 l · czas cięcia 15–30 min · montaż ościeżnic · nie trzyma PE, PP, silikonu, teflonu.' } },
+      { card: { badge: 'Marka własna', name: 'Piana Langer Economy Line', meta: '750 ml · 20,90 zł brutto · kod LGRECO750',
+        img: 'https://zapianowany.pl/userdata/public/gfx/673/Piana-montazowa-Langer-Economy-Line.webp',
+        summary: 'Niskoprężna piana ekonomiczna — najtańsze wejście marki własnej.',
+        use: 'Montaż okablowania, wypełnianie szczelin i otworów, izolacja cieplna i akustyczna, wentylacja/klimatyzacja, uszczelnianie ościeżnic.',
+        push: 'Cena · niskoprężna (wzrost ~30%, bez odkształceń) · λ = 0,03 W/(m·K) · akustyka 60 dB.',
+        specs: 'Prepolimer PU · wysychanie 10–14 min · cięcie 30–40 min · utwardzenie 18 h (+23°C) · gęstość 20–25 kg/m³ · wydajność do 45 l · trwałość 12 mies.',
+        limits: 'UV · nie trzyma teflonu, PE, silikonu.',
+        remember: 'Wydajność do 45 l · wzrost ~30% · to tańsza opcja marki własnej.' } },
+      { card: { badge: 'Marka własna', name: 'Piana Langer XL Fast', meta: '870 ml · 27,99 zł brutto · kod C9B5-7239F',
+        img: 'https://sklep361229.shoparena.pl/console/image/resize/nowatermark/1/type/productGfx/image/757.webp',
+        summary: 'Szybkowiążąca piana do montażu stolarki okiennej i drzwiowej. Szybkość + precyzja.',
+        use: 'Montaż stolarki (okna, drzwi, ościeżnice), uszczelnianie złączy i płyt G-K, izolacja, przepusty instalacyjne.',
+        push: 'Gotowa do obróbki po ~30 min · wydajność do 65 l · **niska rozszerzalność wtórna** = minimalne naprężenia na ościeżnice · odporność na wilgoć i pleśń.',
+        specs: '870 ml · do 65 l · obróbka ~30 min · aplikacja pistoletem · odporność −60 do +100°C.',
+        limits: 'UV.',
+        remember: 'Od Langer 70 różni się szybszym wiązaniem (30 min) i nastawieniem na stolarkę · do 65 l · niska rozszerzalność wtórna.' } },
+      { card: { name: 'Piana Langer 70 Zimowa −10°C', meta: 'Sezonowa (zima)',
+        img: 'https://zapianowany.pl/userdata/public/gfx/699/Pianka-zimowa-Langer-70--10.webp',
+        summary: 'Klasa Langer 70 do pracy w mrozie do −10°C. Sprzedawana sezonowo, zimą.',
+        remember: 'Oferujemy zimą, do montażu w mrozie do −10°C.' } },
+      { card: { badge: 'Marka własna', name: 'Klej montażowy Langer Tur', meta: '290 ml · 24,97 zł brutto · kod KAT01122',
+        img: 'https://sklep361229.shoparena.pl/console/image/resize/nowatermark/1/type/productGfx/image/504.png',
+        summary: 'Klej montażowy na MS Polimerze — błyskawiczny chwyt, mocuje ciężkie elementy bez podpierania.',
+        use: 'Parapety, listwy, panele ścienne, lustra, elementy dekoracyjne. Łączy stal, aluminium, miedź, szkło, PVC, drewno, beton, ceramikę, G-K.',
+        push: 'Chwyt początkowy do 500 kg/m² (bez podpierania!) · wytrzymałość końcowa 22 kg/cm² · elastyczność ±25% · wodoodporny · bez zapachu i rozpuszczalników · malowalny.',
+        specs: 'Baza MS Polimer · naskórek 10–15 min · utwardzanie 2–3 mm/24 h · temp. +5 do +40°C · odporność −40 do +95°C · kolor biały.',
+        limits: 'Nie do PE, PP, teflonu, podłoży bitumicznych · nie do stałego zanurzenia w wodzie.',
+        remember: 'Baza MS Polimer · chwyt do 500 kg/m² bez podpierania · korzyść dla wykonawcy: koniec z podpieraniem = szybsza praca.' } },
+      { card: { badge: 'Marka własna', name: 'Pianoklej Langer Express 60 sekund', meta: '750 ml · 24,99 zł brutto · kod LGR60S',
+        img: 'https://sklep361229.shoparena.pl/console/image/resize/nowatermark/1/type/productGfx/image/510.webp',
+        summary: 'Pianoklej z utwardzaniem startującym po 60 s i korektą przez 2 min. Dla niecierpliwych.',
+        use: 'Klejenie płyt EPS/XPS, G-K, drewna, OSB, ścianek działowych; izolacja termiczna, wykończenia wnętrz.',
+        push: 'Start utwardzania po 60 s · korekta 2 min · pełne utwardzenie ~2 h · uniwersalna przyczepność · stabilność objętościowa.',
+        specs: 'Baza PU · kolor żółty · odporność −20 do +85°C · gęstość 20–30 kg/m³ · max spoina 30 mm.',
+        limits: 'UV (bez ochrony struktura zaburza się po 14 dni–3 mies.).',
+        remember: 'Start utwardzania 60 s · korekta 2 min · max szerokość spoiny 30 mm.' } },
+      { card: { badge: 'Marka własna', name: 'Pianoklej Langer do styropianu (XPS, EPS)', meta: '750 ml · 23,99 zł brutto · kod LGRSTYR750',
+        img: 'https://sklep361229.shoparena.pl/console/image/resize/nowatermark/1/type/productGfx/image/672.webp',
+        summary: 'Pianoklej do mocowania płyt styropianowych na fasadach i fundamentach. Niska ekspansja.',
+        use: 'Mocowanie EPS na fasadach (nowe i remonty), fundamenty, dachówki, parapety. Aplikacja: pasek 3–4 cm od krawędzi płyty + jeden w środku.',
+        push: 'Niska ekspansja (nie odkształca izolacji) · wydajność do 10 m²/puszka · λ = 0,034 W/(m·K) · niska wodochłonność.',
+        specs: 'Baza PU · naskórek 10–12 min · utwardzenie 9–11 h (+23°C) · temp. −5 do +30°C · gęstość 25–30 kg/m³ · trwałość 9 mies.',
+        limits: 'Nie trzyma teflonu, PE, silikonu.',
+        remember: 'Wydajność do 10 m² · λ = 0,034 W/(m·K) · do klejenia styropianu EPS na fasadach.' } },
+      { card: { name: 'Pistolet T400 PTFE', meta: '79,99 zł brutto · kod N1065',
+        img: 'https://sklep361229.shoparena.pl/console/image/resize/nowatermark/1/type/productGfx/image/558.webp',
+        summary: 'Pistolet z powłoką PTFE (teflon) — łatwe czyszczenie, śruba regulacji grubości warkocza = oszczędność pianki, ergonomia.',
+        push: 'Dosprzedaż do każdego zamówienia pianek i pianoklejów. W zestawach idzie „za złotówkę" (patrz Moduł 4).',
+        remember: 'Przy piankach proponuj zawsze: kontrola aplikacji + oszczędność piany = naturalny dodatek do koszyka.' } },
+      { prose: [
+        { h: 'Soudal — piany (kanon)' },
+        { p: 'Dwie wersje aplikacji: **nakręcana** (standard) oraz **Click & Fix** (montaż zatrzaskowy — szybsza wymiana puszki).' },
+        { table: { head: ['Piana', 'Aplikacja', 'Opak.', 'Cena brutto'], rows: [
+          ['Soudal Classic', 'nakręcana', '750 ml', '27,99 zł'],
+          ['Soudal Classic Click & Fix', 'klik', '750 ml', '27,99 zł'],
+          ['Soudal Maxi', 'nakręcana', '870 ml', '31,99 zł'],
+          ['Soudal Maxi Click & Fix', 'klik', '—', '29,99 zł'],
+          ['Soudal Maxi Express', 'nakręcana', '870 ml', '31,99 zł'],
+          ['Soudal Yellow', 'nakręcana', '750 ml', '25,82 zł'],
+          ['Soudal Genius Gun (na rurkę)', 'rurka', '770 ml', '22,69 zł'],
+        ] } },
+        { note: 'Wersje zimowe (sezonowe): Classic −10°, Yellow −10°, Maxi Express −25°, Genius Gun −10°. Bestsellery w punktach: Classic i Yellow.' },
+      ] },
+      { prose: [
+        { h: 'Silikony (mocno w punktach)' },
+        { table: { head: ['Typ', 'Soudal', 'Distyk (taniej)'], rows: [
+          ['Sanitarne', '15,99–22,37', '**14,39**'],
+          ['Uniwersalne', '15,99–16,99', '**14,39**'],
+          ['Neutralne', '20,88–21,56', '—'],
+          ['Szklarskie', '18,08–20,62', '—'],
+          ['Wysokotemperaturowe', 'od 14,64', '—'],
+        ] } },
+        { callout: 'Taktyka: gdy liczy się cena → **Distyk** (wyższa marża dla nas). Gdy klient chce pewności marki → **Soudal**.' },
+      ] },
+      { prose: [
+        { h: 'Akryle (dużo w punktach)' },
+        { table: { head: ['Rodzaj', 'Soudal', 'Distyk'], rows: [
+          ['Uniwersalny', '8,18', '**7,49**'],
+          ['Lekki szpachlowy', '10,09', '—'],
+          ['Szybki / Express', '10,82', '9,49'],
+          ['Do płyt G-K', '10,76', '—'],
+          ['Do tynków (strukturalny)', '9,59', '—'],
+          ['Kity do parkietu', '~14,16', '~10,87'],
+        ] } },
+      ] },
+      { prose: [
+        { h: 'Co najwięcej schodzi w punktach stacjonarnych' },
+        { p: 'Inny mix niż telefon. Telefon (zapianowany) = pianki/pianokleje Langer. Punkt = szybkoobrotowa półka:' },
+        { ul: [
+          '**Piany:** Soudal Classic, Soudal Yellow, piana na rurkę (Genius Gun)',
+          '**Silikony:** sanitarne, uniwersalne',
+          '**Akryle:** lekki, strukturalny (do tynków)',
+          '**Technicqll:** drobne produkty naprawcze',
+        ] },
+      ] },
+    ],
+  },
+
+  2: {
+    lead: 'Komu sprzedajemy i jak rozpoznać, czego klient potrzebuje.',
+    sections: [
+      { prose: [
+        { h: 'Dwa wymiary segmentacji' },
+        { p: 'Segmentujemy naraz w dwóch wymiarach:' },
+        { ul: [
+          '**Kanał** — *jak i gdzie* klient kupuje → określa rolę handlowca i mix produktów.',
+          '**Typ wykonawcy** — *czym się zajmuje* → określa, jakich produktów potrzebuje.',
+        ] },
+        { p: 'Realny klient to skrzyżowanie obu, np. „montażysta okien dzwoniący z leada FB" albo „skład budowlany na Mazowszu".' },
+      ] },
+      { prose: [
+        { h: 'Segmenty wg kanału' },
+        { table: { head: ['', 'klejpan.pl', 'zapianowany.pl', 'Langer Dystrybucja'], rows: [
+          ['**Kto**', 'B2C + drobny B2B', 'wykonawcy, firmy montażowe', 'punkty handlowe / składy'],
+          ['**Rola handlowca**', 'brak', 'doradztwo + domknięcie', 'relacja + obsługa półki'],
+          ['**Co pchamy**', 'Langer jako jeden z wyborów', 'marka własna Langer', 'Langer + szeroki przekrój'],
+          ['**Mix produktów**', 'pełny katalog', 'pianki/pianokleje Langer, Tur', 'Classic, Yellow, na rurkę, silikony, akryle, Technicqll'],
+        ] } },
+      ] },
+      { prose: [
+        { h: 'Segmenty wg typu wykonawcy' },
+        { sub: '1. Montażyści okien i drzwi' },
+        { ul: ['**Potrzeby:** czas (szybkoschnące), jakość (wydajna, niskoprężna, stabilna), szybka wysyłka.',
+          '**Nasze produkty:** Langer 70, Langer XL Fast, Soudal Classic/Maxi, pistolet T400.',
+          '**Co ich rusza:** wysyłka do 12:00, dostawa na budowę, pobranie, rabaty ilościowe, doradztwo.'] },
+        { sub: '2. Elewacje / ocieplenia' },
+        { ul: ['**Potrzeby:** wydajność (więcej płyt z puszki), gęsta i nieodkształcająca, konkurencyjna cena (duże zużycie).',
+          '**Nasze produkty:** Langer do styropianu XPS/EPS, Langer 70, Soudal Soudatherm/Soudabond.',
+          '**Co ich rusza:** rabaty ilościowe, darmowa dostawa od 60 szt., wydajność = oszczędność.'] },
+        { sub: '3. Firmy wykończeniowe' },
+        { ul: ['**Potrzeby:** klej ma się nie odklejać, szybkie schnięcie, szeroki wybór, mniejsze ilości pod projekt.',
+          '**Nasze produkty:** Langer Tur, Bostik Mamut, Langer Express 60s, silikony, akryle.',
+          '**Co ich rusza:** szeroki asortyment, doradztwo w doborze, elastyczne ilości (od jednego kartusza).'] },
+        { sub: '4. Firmy produkcyjne' },
+        { ul: ['**Potrzeby:** określone parametry techniczne, doradztwo, zamówienia nietypowe.',
+          '**Nasze produkty:** zróżnicowane — kleje, silikony, produkty specjalistyczne.',
+          '**Co ich rusza:** fachowe doradztwo, realizacja nietypowych zamówień, stabilność dostaw.'] },
+        { sub: '5. Firmy meblarskie' },
+        { ul: ['**Potrzeby:** jakość i trwałość połączeń, różne opakowania pod wielkość produkcji.',
+          '**Nasze produkty:** Langer Tur, silikony.',
+          '**Co ich rusza:** jakość, dostępność, różne opakowania.'] },
+        { sub: '6. Składy / punkty handlowe' },
+        { ul: ['**Potrzeby:** doświadczeni gracze — głównie zbicie ceny, rabaty ilościowe, szeroki asortyment, dostępność nowości.',
+          '**Nasze produkty:** szybkoobrotowa półka (Classic, Yellow, na rurkę, silikony, akryle, Technicqll) + Langer.',
+          '**Co ich rusza:** ceny i rabaty, terminowość, szeroki wybór, współpraca marketingowa.'] },
+      ] },
+      { prose: [
+        { h: 'Wsparcie punktów (w przygotowaniu)' },
+        { callout: 'Program partnerski dla punktów (progi rabatowe, wsparcie marketingowe, ekspozytory, termin płatności, mechanizm Langer→Soudal) jest **w opracowaniu**. Na razie **NIE komunikujemy** go klientom — wspominamy tylko o szerokim asortymencie od ręki, szybkiej realizacji i pierwszeństwie przy brakach.' },
+      ] },
+    ],
+  },
+
+  3: {
+    lead: 'Dwa tryby sprzedaży = dwa schematy rozmów. Plus obrona przed obiekcjami.',
+    sections: [
+      { prose: [
+        { h: 'Dwa schematy' },
+        { ul: [
+          '**A. Telefon (zapianowany.pl)** — rozmowa z wykonawcą po leadzie z FB. Sprzedaż projektowa, pchamy Langer.',
+          '**B. Punkt stacjonarny (Langer Dystrybucja)** — rozmowa z właścicielem/kupcem punktu. Sprzedaż relacyjna B2B — klient jest resellerem, interesuje go marża i rotacja, nie własne zużycie.',
+        ] },
+      ] },
+      { prose: [
+        { h: 'A. Rozmowa telefoniczna (lead z FB)' },
+        { callout: 'Zasada nadrzędna: **najpierw słuchasz i diagnozujesz, dopiero potem proponujesz.** Notuj w trakcie rozmowy.' },
+        { steps: [
+          { n: 1, title: 'Przedstawienie się i powód telefonu', quote: 'Dzień dobry, [imię] z Zapianowany. Dzwonię, bo zostawił Pan formularz na Facebooku — pianki/kleje/silikony. Chwilę ma Pan teraz?' },
+          { n: 2, title: 'Identyfikacja potrzeb', text: 'Czym się zajmuje? Montaż okien? Elewacje? Wykończenia? — to ustawia segment i produkty.' },
+          { n: 3, title: 'Preferencje produktowe', text: 'Na czym teraz pracuje i co go w tym trzyma — marka, cena, wydajność? Sprawdź otwartość na test.' },
+          { n: 4, title: 'Prezentacja oferty (korzyść, nie cecha)', text: 'Montażysta → Langer 70 / XL Fast. Elewacje → Langer do styropianu. Wykończenia → Tur, Express 60s, silikony, akryle.', quote: 'Standard to ~45 litrów, nasze pianki robią do 70 — rzadziej Pan zmienia puszkę.' },
+          { n: 5, title: 'Skala potrzeb', text: 'Miesięczne zużycie, zapasy, częstotliwość — i co ceni u dostawcy (dostawa? cena? reakcja?).' },
+          { n: 6, title: 'Dopasowanie do oczekiwań', text: 'Podkreśl wartości firmy: wysyłka do 12:00, dostawa na budowę, pobranie, rabaty ilościowe, doradztwo.' },
+          { n: 7, title: 'Propozycja zamówienia próbnego', text: 'Mniejszy zestaw na test. „Niech Pan sprawdzi na jednej robocie."' },
+          { n: 8, title: 'Brak decyzji = też OK', text: 'E-mail → dopasowana oferta → SMS przypominający → konkretny termin kolejnego telefonu.' },
+        ] },
+      ] },
+      { prose: [
+        { h: 'SMS po rozmowie (szablon)' },
+        { p: 'Dziękuję za rozmowę. Najważniejsze tematy:' },
+        { ul: ['Charakter pracy: [np. montaże okien]', 'Kluczowy produkt: [np. pianka montażowa]', 'Najważniejsze cechy: [np. wydajność, niskoprężność, cena]'] },
+        { p: 'Dopasowaną ofertę wysłałem na maila. Odezwę się [dzień] ok. [godz.]. Pozdrawiam, [imię], Langer' },
+      ] },
+      { prose: [
+        { h: 'Druga rozmowa (follow-up)' },
+        { ul: [
+          '**Przygotowanie:** przejrzyj notatki, sprawdź czy oferta dotarła, przygotuj odpowiedzi na bariery.',
+          '**Załóż, że nie przeczytał oferty** — krótko przypomnij najważniejsze korzyści.',
+          'Jeśli nie zajrzał: „Bo co tam teraz porabiacie?" → znów potwierdzasz zapotrzebowanie.',
+          '**Domknięcie:** przy wahaniu → konkret (mniejsze zamówienie próbne, elastyczna płatność).',
+          'Zamówienie → ustal szczegóły; potrzebuje czasu → konkretny termin; zawsze podziękuj.',
+        ] },
+      ] },
+      { prose: [
+        { h: 'B. Rozmowa w punkcie stacjonarnym' },
+        { callout: 'Klient **NIE zużywa towaru — on go odsprzedaje.** Mów językiem jego zysku: „zarobisz więcej z metra półki i klienci będą wracać".' },
+        { p: '**Kontekst Mazowsze/Budma:** część punktów to klienci po Budmie Chemii. Pierwszy komunikat to ciągłość i spokój: „To, co braliście, dalej macie — plus dokładamy markę własną z lepszą marżą dla Was."' },
+        { steps: [
+          { n: 1, title: 'Wejście / relacja', quote: '[imię], Langer Grupa. Wchodzimy w okolicy jako dostawca chemii budowlanej — Soudal, Distyk i nasza marka własna Langer.' },
+          { n: 2, title: 'Rozpoznanie punktu', text: 'Co najlepiej schodzi, jacy klienci końcowi, od kogo teraz biorą, bolączki (braki, terminy, marża, reklamacje). Słuchaj więcej niż mówisz.' },
+          { n: 3, title: 'Pozycjonowanie — podwójny argument', text: 'Langer = wyższa marża dla punktu + 70 l zamiast 45 dla ich klienta. Soudal = sam się sprzedaje, punkt nie ryzykuje. My = szeroki asortyment od ręki, pierwszeństwo przy brakach.' },
+          { n: 4, title: 'Pierwsze zatowarowanie', text: 'Półka bestsellerów: Classic, Yellow, na rurkę, Langer 70, silikony sanitarne/uniwersalne, akryle, drobne Technicqll.' },
+          { n: 5, title: 'Warunki współpracy', text: 'Ceny i progi rabatowe, termin płatności / kredyt kupiecki, dostawa, dane opiekuna.' },
+          { n: 6, title: 'Domknięcie / kolejne kroki', text: 'Pierwsze zamówienie próbne albo termin kolejnej wizyty. Zostaw cennik, wizytówkę, ewentualnie próbki.' },
+        ] },
+      ] },
+      { prose: [
+        { h: 'Obrona przed obiekcjami' },
+        { objections: [
+          { o: 'Mam już dostawcę', a: 'Nie atakuj dostawcy. „Spoko — niech to zostanie. Proponuję dorzucić jedną rzecz na test, bez zobowiązań." (punkt: + marża na Langerze)' },
+          { o: 'Za drogo', a: 'Przesuń z ceny na koszt jednostkowy: wydajność 70 vs 45 l = niższy koszt na puszkę i na metr roboty.' },
+          { o: 'Nie znam Langera', a: 'Dlatego proponuję mały test. „Sprzedajemy bezpośrednio, stąd cena." Po teście na jednej robocie klient zostaje.' },
+          { o: 'Nie mam czasu', a: 'Krótko, konkret, jeden termin kontaktu. Nie przeciągaj.' },
+          { o: 'Nie potrzebuję teraz', a: '„Rozumiem. Co tam teraz robicie?" → diagnoza realnego zapotrzebowania + termin kolejnego kontaktu.' },
+        ] },
+      ] },
+    ],
+  },
+
+  4: {
+    lead: 'Gotowe zestawy i taktyki, które podnoszą koszyk i wprowadzają Langera.',
+    sections: [
+      { prose: [
+        { h: 'Dwie dźwignie taktyczne' },
+        { sub: '1. Pistolet teflonowy „za złotówkę"' },
+        { p: 'Pistolet T400 PTFE (normalnie 79,99 zł) w zestawie idzie za **1,00 zł netto** + darmowa dostawa. Podnosi koszyk, ułatwia decyzję, a dobry pistolet = lepsze doświadczenie z pianką = **powroty**.' },
+        { sub: '2. Zestawy Soudal : Langer (2:1) — „koń trojański"' },
+        { p: 'Klient bierze zaufany **Soudal**, a **Langer dostaje przy okazji do testu.** Po teście kolejne zamówienie = czysty Langer (wyższa marża). Flagowy: **24× Soudal Maxi + 12× Langer 70** — 995,64 zł brutto.' },
+      ] },
+      { prose: [
+        { h: 'Zestawy: piana/pianoklej + pistolet za 1 zł' },
+        { table: { head: ['Zestaw', 'Cena brutto'], rows: [
+          ['27× Langer 70 + pistolet', '714,84'],
+          ['54× Langer 70 + pistolet', '1 394,97'],
+          ['30× Langer Economy + pistolet', '627,93'],
+          ['60× Langer Economy + pistolet', '1 218,03'],
+          ['60× Soudal Classic + pistolet', '1 680,03'],
+          ['60× Soudal Yellow + pistolet', '1 549,83'],
+          ['54× Soudal Maxi Click&Fix + pistolet', '1 594,23'],
+          ['60× pianoklej Langer do styropianu + pistolet', '1 435,83'],
+          ['60× pianoklej Langer Express 60s + pistolet', '1 402,23'],
+        ] } },
+      ] },
+      { prose: [
+        { h: 'Zestawy mieszane (koń trojański + cross-sell)' },
+        { table: { head: ['Zestaw', 'Proporcja', 'Cena brutto'], rows: [
+          ['24× Soudal Maxi + 12× Langer 70', '2:1', '995,64'],
+          ['24× Soudal Classic + 12× Langer Economy', '2:1', '885,00'],
+          ['24× Langer Economy + 24× Langer 70', '1:1', '1 091,28'],
+        ] } },
+      ] },
+      { prose: [
+        { h: 'Zestawy klejów (Langer Tur + Bostik Mamut)' },
+        { table: { head: ['Zestaw', 'Cena brutto'], rows: [
+          ['12× Mamut + 12× Langer Tur', '612,27'],
+          ['24× Langer Tur + 24× Bostik Mamut', '1 215,60'],
+          ['36× Langer Tur + wyciskacz', '879,90'],
+          ['54× Langer Tur + wyciskacz', '1 292,64'],
+          ['108× Langer Tur + wyciskacz', '2 480,91'],
+        ] } },
+      ] },
+      { prose: [
+        { h: 'Taktyki w rozmowie' },
+        { ul: [
+          '**Koń trojański (Langer-first):** wierny Soudalowi → zestaw 2:1. „Bierze Pan swój Maxi, a my dorzucamy karton Langera 70 do testu."',
+          '**Pistolet za 1 zł jako domknięcie:** klient waha się przy ilości → „Przy zestawie pistolet dostaje Pan za złotówkę, dostawa gratis."',
+          '**Up-sell wydajności:** zawsze przeliczaj na koszt jednostkowy — 70 l vs ~45 l = mniej puszek na tę samą robotę.',
+          '**Cross-sell w obrębie marki:** Economy (wejście cenowe) → Langer 70 (premium); pianka → pistolet → pianoklej.',
+          '**Próg darmowej dostawy (60 szt.):** „Brakuje kilku sztuk do darmowej dostawy."',
+        ] },
+      ] },
+      { prose: [
+        { h: 'Zestawy startowe na pierwsze zamówienie (telefon)' },
+        { ul: [
+          '**Biorę bestsellera:** 27× Langer 70 (+ pistolet za 1 zł)',
+          '**Wolę porównać:** 24× Soudal Maxi + 12× Langer 70 (2:1)',
+          '**Chcę wypróbować:** mniejszy mix na test',
+        ] },
+        { note: 'Gwarancja satysfakcji: produkt zamknięty fabrycznie można zwrócić w 14 dni.' },
+      ] },
+    ],
+  },
+};
+
+/* ---- inline **bold** ---- */
+function rich(text) {
+  return String(text).split('**').map((s, i) =>
+    i % 2 ? <strong key={i}>{s}</strong> : <React.Fragment key={i}>{s}</React.Fragment>
+  );
+}
+
+/* ---- rozbija ciąg na pojedyncze „chipy": po „·", a gdy ich brak — po przecinkach ---- */
+function smartChips(text) {
+  const s = String(text).trim().replace(/\.$/, '');
+  const parts = s.includes(' · ') ? s.split(' · ') : s.split(/,\s+/);
+  return parts.map(p => p.trim()).filter(Boolean);
+}
+const Chips = ({ text }) => (
+  <div className="pc-chips">
+    {smartChips(text).map((x, i) => <span className="chip" key={i}>{rich(x)}</span>)}
+  </div>
+);
+
+/* ---- renderer bloków treści ---- */
+function Block({ b }) {
+  if (b.h) return <h3>{b.h}</h3>;
+  if (b.sub) return <h4>{b.sub}</h4>;
+  if (b.p) return <p>{rich(b.p)}</p>;
+  if (b.callout) return <div className="callout">{rich(b.callout)}</div>;
+  if (b.note) return <p className="note">{rich(b.note)}</p>;
+  if (b.ul) return <ul>{b.ul.map((x, i) => <li key={i}>{rich(x)}</li>)}</ul>;
+  if (b.ol) return <ol>{b.ol.map((x, i) => <li key={i}>{rich(x)}</li>)}</ol>;
+  if (b.table) return (
+    <table className="t">
+      <thead><tr>{b.table.head.map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+      <tbody>{b.table.rows.map((r, i) => <tr key={i}>{r.map((c, j) => <td key={j}>{rich(c)}</td>)}</tr>)}</tbody>
+    </table>
+  );
+  if (b.steps) return (
+    <div className="steps">{b.steps.map((s, i) => (
+      <div className="step" key={i}>
+        <div className="step-n">{s.n}</div>
+        <div className="step-b">
+          <div className="step-t">{s.title}</div>
+          {s.text && <div className="step-x">{rich(s.text)}</div>}
+          {s.quote && <div className="quote">{rich(s.quote)}</div>}
+        </div>
+      </div>
+    ))}</div>
+  );
+  if (b.objections) return (
+    <div>{b.objections.map((o, i) => (
+      <div className="obj" key={i}>
+        <div className="obj-q">„{o.o}"</div>
+        <div className="obj-a">{rich(o.a)}</div>
+      </div>
+    ))}</div>
+  );
+  return null;
+}
+
+function ProductCard({ c }) {
+  return (
+    <div className={'pcard' + (c.star ? ' star' : '')}>
+      <div className="pcard-top">
+        {c.img && (
+          <div className="pcard-thumb">
+            <img src={c.img} alt={c.name} loading="lazy"
+                 onError={e => { const t = e.currentTarget.closest('.pcard-thumb'); if (t) t.style.display = 'none'; }} />
+          </div>
+        )}
+        <div className="pcard-head">
+          <div className="pcard-name">{c.star ? '⭐ ' : ''}{c.name}</div>
+          {c.meta && <div className="pcard-meta">{c.meta}</div>}
+        </div>
+        {c.badge && <span className={'pcard-badge ' + (c.badge === 'Marka własna' ? 'badge-own' : 'badge-best')}>{c.badge}</span>}
+      </div>
+      <div className="pc-rows">
+        {c.summary && <div className="pc-summary">{rich(c.summary)}</div>}
+        {c.use && <div><div className="pc-label">Do czego</div><Chips text={c.use} /></div>}
+        {c.push && <div className="pc-push"><div className="pc-label">🎯 Wyróżniki — czym przekonać klienta</div><Chips text={c.push} /></div>}
+        {c.specs && <div><div className="pc-label">Dane techniczne</div><Chips text={c.specs} /></div>}
+        {c.limits && <div className="pc-limit"><div className="pc-label">⚠️ Uwaga / ograniczenia</div><Chips text={c.limits} /></div>}
+        {c.remember && <div className="pc-remember"><div className="pc-label">⭐ Zapamiętaj</div>{rich(c.remember)}</div>}
+      </div>
+    </div>
+  );
+}
+
+function Section({ s }) {
+  if (s.card) return <ProductCard c={s.card} />;
+  return <div className="prose lesson">{s.prose.map((b, i) => <Block key={i} b={b} />)}</div>;
+}
+
+function Sections({ sections }) {
+  return <div className="lesson-wrap">{sections.map((s, i) => <Section key={i} s={s} />)}</div>;
+}
+
+function ReadingModule({ mod, onBack }) {
+  const data = CONTENT[mod.id];
+  return (
+    <div className="main">
+      <button className="backlink" onClick={onBack}><IBack s={16}/> Wszystkie moduły</button>
+      <div className="mh"><div>
+        <div className="mh-h">Moduł {mod.id} — {mod.name}</div>
+        <p className="mh-d">{data.lead}</p>
+      </div></div>
+      <div style={{ marginTop: 24 }}><Sections sections={data.sections} /></div>
+    </div>
+  );
+}
+
+/* ============================================================
    IKONY
    ============================================================ */
 const Svg = ({ s = 18, children, style }) => (
@@ -230,6 +714,7 @@ const Svg = ({ s = 18, children, style }) => (
 const IBack  = (p) => <Svg {...p}><path d="M19 12H5M12 19l-7-7 7-7"/></Svg>;
 const IArrowL= (p) => <Svg {...p}><path d="M15 18l-6-6 6-6"/></Svg>;
 const IArrowR= (p) => <Svg {...p}><path d="M9 18l6-6-6-6"/></Svg>;
+const IBook  = (p) => <Svg {...p}><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z"/></Svg>;
 const ICards = (p) => <Svg {...p}><rect x="2" y="7" width="14" height="14" rx="2"/><path d="M8 3h12a2 2 0 012 2v12"/></Svg>;
 const IQuiz  = (p) => <Svg {...p}><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 015.8 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></Svg>;
 const ICheck = (p) => <Svg {...p}><path d="M20 6L9 17l-5-5"/></Svg>;
@@ -238,6 +723,17 @@ const IRepeat= (p) => <Svg {...p}><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7
 /* ============================================================
    API + POSTĘP (localStorage)
    ============================================================ */
+async function verifyCode(code) {
+  try {
+    const r = await fetch('/api/onboarding/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code }),
+    });
+    return r.ok;
+  } catch { return false; }
+}
+
 async function fetchCards(module) {
   const res = await fetch(`/api/onboarding/cards?module=${module}`);
   if (!res.ok) throw new Error('API ' + res.status);
@@ -277,6 +773,45 @@ function Logo({ light }) {
 }
 
 /* ============================================================
+   LOGOWANIE (wspólny kod dostępu)
+   ============================================================ */
+function OnbLogin({ onOk }) {
+  const [code, setCode] = useState('');
+  const [err, setErr] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  async function submit(e) {
+    e.preventDefault();
+    setErr('');
+    if (!code.trim()) { setErr('Wpisz kod dostępu.'); return; }
+    setLoading(true);
+    const ok = await verifyCode(code.trim());
+    setLoading(false);
+    if (ok) {
+      localStorage.setItem('lg_onb_code', code.trim());
+      onOk();
+    } else {
+      setErr('Niepoprawny kod dostępu.');
+    }
+  }
+
+  return (
+    <div className="auth-wrap">
+      <form className="auth-card" onSubmit={submit}>
+        <Logo />
+        <h1 className="auth-h">Onboarding Langer</h1>
+        <p className="auth-d">Strefa wewnętrzna dla pracowników. Podaj kod dostępu, który dostałeś od zespołu.</p>
+        {err && <div className="auth-err">{err}</div>}
+        <input className="auth-input" type="password" value={code} onChange={e => setCode(e.target.value)} placeholder="kod dostępu" autoFocus />
+        <button type="submit" className="btn btn-flame" style={{ width: '100%', marginTop: 14, padding: 14 }} disabled={loading}>
+          {loading ? <><span className="spinner"/> Sprawdzam…</> : 'Wejdź'}
+        </button>
+      </form>
+    </div>
+  );
+}
+
+/* ============================================================
    EKRAN GŁÓWNY
    ============================================================ */
 function Home({ onOpen, m1stats }) {
@@ -311,6 +846,7 @@ function Home({ onOpen, m1stats }) {
               <div className="mod-right">
                 {m.status === 'soon'   && <span className="pill pill-soon">Wkrótce</span>}
                 {m.status === 'info'   && <span className="pill pill-info">Do przeczytania</span>}
+                {m.status === 'read'   && <span className="pill pill-info">Materiały</span>}
                 {m.status === 'active' && <span className="pill pill-active">Start tutaj</span>}
                 {isActive && m1stats && m1stats.total > 0 && (
                   <>
@@ -366,12 +902,6 @@ function Module0({ onBack }) {
             <tr><td><b>Langer Dystrybucja</b><br/><span className="muted">od 01.07.2026</span></td><td>stacjonarny B2B</td><td>punkty handlowe / składy</td><td><b>kluczowa</b> — relacja, obsługa punktu</td></tr>
           </tbody>
         </table>
-      </div>
-
-      <div className="prose">
-        <h3>Kontekst 2026</h3>
-        <p>Langer Dystrybucja wchodzi na Mazowsze w miejsce <b>Budmy Chemii</b> (wycofuje się do 01.07.2026).
-        To <b>sukcesja, nie automatyczne przejęcie</b> — klientów trzeba utrzymać relacyjnie.</p>
       </div>
 
       <div style={{ textAlign: 'center', marginTop: 28 }}>
@@ -594,7 +1124,7 @@ function Quiz({ cards }) {
 function Module1({ onBack, onStats }) {
   const [cards, setCards] = useState(null);
   const [usingSeed, setUsingSeed] = useState(false);
-  const [mode, setMode] = useState('cards');
+  const [mode, setMode] = useState('read');
 
   useEffect(() => {
     let alive = true;
@@ -627,10 +1157,12 @@ function Module1({ onBack, onStats }) {
       </div>
 
       <div className="modes">
+        <button className={'mode-tab' + (mode === 'read' ? ' active' : '')} onClick={() => setMode('read')}><IBook s={16}/> Materiały</button>
         <button className={'mode-tab' + (mode === 'cards' ? ' active' : '')} onClick={() => setMode('cards')}><ICards s={16}/> Fiszki</button>
         <button className={'mode-tab' + (mode === 'quiz' ? ' active' : '')} onClick={() => setMode('quiz')}><IQuiz s={16}/> Quiz</button>
       </div>
 
+      {mode === 'read'  && <Sections sections={CONTENT[1].sections} />}
       {mode === 'cards' && <Flashcards key="cards" cards={cards} module={1} />}
       {mode === 'quiz'  && <Quiz key="quiz" cards={cards} />}
 
@@ -648,14 +1180,43 @@ function Module1({ onBack, onStats }) {
    APP
    ============================================================ */
 function App() {
+  const [gate, setGate] = useState(null);   // null = ładowanie, true = wymaga kodu, false = otwarte
+  const [authed, setAuthed] = useState(false);
   const [view, setView] = useState(0);     // 'home' | numer modułu
   const [home, setHome] = useState(true);
   const [m1stats, setM1stats] = useState(null);
 
+  useEffect(() => {
+    let alive = true;
+    fetch('/api/onboarding/auth')
+      .then(r => r.ok ? r.json() : { gate: false })
+      .then(g => {
+        if (!alive) return;
+        if (!g.gate) { setGate(false); setAuthed(true); return; }
+        setGate(true);
+        const saved = localStorage.getItem('lg_onb_code');
+        if (saved) {
+          verifyCode(saved).then(ok => {
+            if (!alive) return;
+            if (ok) setAuthed(true);
+            else localStorage.removeItem('lg_onb_code');
+          });
+        }
+      })
+      .catch(() => { if (alive) { setGate(false); setAuthed(true); } }); // API niedostępne (np. podgląd lokalny) → wpuść
+    return () => { alive = false; };
+  }, []);
+
   function open(id) { setHome(false); setView(id); window.scrollTo(0, 0); }
   function back()    { setHome(true); window.scrollTo(0, 0); }
+  function logout()  { localStorage.removeItem('lg_onb_code'); setAuthed(false); setHome(true); }
 
   const mod = MODULES.find(m => m.id === view);
+
+  if (gate === null) return (
+    <div className="main"><p className="muted" style={{ textAlign: 'center', padding: 80 }}><span className="spinner"/> Wczytywanie…</p></div>
+  );
+  if (gate && !authed) return <OnbLogin onOk={() => setAuthed(true)} />;
 
   return (
     <>
@@ -667,12 +1228,13 @@ function App() {
             <div className="hdr-sub">Langer Grupa</div>
           </div>
         </div>
-        <a className="hdr-btn" href="/" target="_blank" rel="noopener">Strona firmowa →</a>
+        {gate && <button className="hdr-btn" onClick={logout}>Wyloguj</button>}
       </header>
 
       {home && <Home onOpen={open} m1stats={m1stats} />}
       {!home && view === 0 && <Module0 onBack={back} />}
       {!home && view === 1 && <Module1 onBack={back} onStats={setM1stats} />}
+      {!home && mod && mod.status === 'read' && <ReadingModule mod={mod} onBack={back} />}
       {!home && mod && mod.status === 'soon' && <ModuleSoon mod={mod} onBack={back} />}
     </>
   );
