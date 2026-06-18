@@ -170,7 +170,10 @@ table.t td { padding: 9px 12px; border-top: 1px solid var(--line); vertical-alig
 /* KARTA PRODUKTU (materiały) */
 .pcard { background: var(--white); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 22px 24px; box-shadow: var(--e1); }
 .pcard.star { border-color: var(--flame); box-shadow: 0 0 0 1px var(--flame), var(--e1); }
-.pcard-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.pcard-top { display: flex; align-items: flex-start; gap: 14px; flex-wrap: wrap; }
+.pcard-head { flex: 1; min-width: 0; }
+.pcard-thumb { flex: none; width: 78px; height: 78px; border-radius: var(--r-md); background: var(--light); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; padding: 7px; }
+.pcard-thumb img { max-width: 100%; max-height: 100%; object-fit: contain; }
 .pcard-name { font-family: var(--font-display); font-weight: 700; font-size: 18px; line-height: 1.2; }
 .pcard-meta { font-family: var(--font-mono); font-size: 12px; color: var(--ash-700); margin-top: 5px; }
 .pcard-badge { font-size: 11px; font-weight: 700; padding: 4px 11px; border-radius: 999px; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
@@ -297,6 +300,7 @@ const CONTENT = {
         { p: 'Siedem produktów, które musisz znać na pamięć. Przy każdym najważniejsze: **na czym pchasz** (zielona ramka) i **czego unikać** (pomarańczowa).' },
       ] },
       { card: { star: true, badge: 'Marka własna', name: 'Piana Langer 70', meta: '870 ml · 26,99 zł brutto · kod KAT01118',
+        img: 'https://sklep361229.shoparena.pl/console/image/resize/nowatermark/1/type/productGfx/image/503.png',
         summary: 'Profesjonalna piana pistoletowa o najwyższej wydajności (do 70 l), niskoprężna. Flagowy produkt.',
         use: 'Montaż ościeżnic okien i drzwi, wypełnianie przestrzeni montażowych, izolacja akustyczna i termiczna, klejenie parapetów, izolacje dachowe, bruzdy na rury i przewody.',
         push: 'Do 70 l (vs standard ~45 l) · niskoprężna = bez wypaczania konstrukcji · stabilna wymiarowo · opakowanie 870 ml = mniej wymian puszki · dobra przyczepność (mur, beton, drewno, styropian).',
@@ -304,6 +308,7 @@ const CONTENT = {
         limits: 'Nie odporna na UV (zabezpieczyć tynkiem/farbą) · nie trzyma się PE, PP, silikonu, teflonu, tłustych podłoży.',
         remember: 'Wydajność do 70 l · czas cięcia 15–30 min · montaż ościeżnic · nie trzyma PE, PP, silikonu, teflonu.' } },
       { card: { badge: 'Marka własna', name: 'Piana Langer Economy Line', meta: '750 ml · 20,90 zł brutto · kod LGRECO750',
+        img: 'https://zapianowany.pl/userdata/public/gfx/673/Piana-montazowa-Langer-Economy-Line.webp',
         summary: 'Niskoprężna piana ekonomiczna — najtańsze wejście marki własnej.',
         use: 'Montaż okablowania, wypełnianie szczelin i otworów, izolacja cieplna i akustyczna, wentylacja/klimatyzacja, uszczelnianie ościeżnic.',
         push: 'Cena · niskoprężna (wzrost ~30%, bez odkształceń) · λ = 0,03 W/(m·K) · akustyka 60 dB.',
@@ -311,6 +316,7 @@ const CONTENT = {
         limits: 'UV · nie trzyma teflonu, PE, silikonu.',
         remember: 'Wydajność do 45 l · wzrost ~30% · to tańsza opcja marki własnej.' } },
       { card: { badge: 'Marka własna', name: 'Piana Langer XL Fast', meta: '870 ml · 27,99 zł brutto · kod C9B5-7239F',
+        img: 'https://sklep361229.shoparena.pl/console/image/resize/nowatermark/1/type/productGfx/image/757.webp',
         summary: 'Szybkowiążąca piana do montażu stolarki okiennej i drzwiowej. Szybkość + precyzja.',
         use: 'Montaż stolarki (okna, drzwi, ościeżnice), uszczelnianie złączy i płyt G-K, izolacja, przepusty instalacyjne.',
         push: 'Gotowa do obróbki po ~30 min · wydajność do 65 l · **niska rozszerzalność wtórna** = minimalne naprężenia na ościeżnice · odporność na wilgoć i pleśń.',
@@ -318,9 +324,11 @@ const CONTENT = {
         limits: 'UV.',
         remember: 'Od Langer 70 różni się szybszym wiązaniem (30 min) i nastawieniem na stolarkę · do 65 l · niska rozszerzalność wtórna.' } },
       { card: { name: 'Piana Langer 70 Zimowa −10°C', meta: 'Sezonowa (zima)',
+        img: 'https://zapianowany.pl/userdata/public/gfx/699/Pianka-zimowa-Langer-70--10.webp',
         summary: 'Klasa Langer 70 do pracy w mrozie do −10°C. Sprzedawana sezonowo, zimą.',
         remember: 'Oferujemy zimą, do montażu w mrozie do −10°C.' } },
       { card: { badge: 'Marka własna', name: 'Klej montażowy Langer Tur', meta: '290 ml · 24,97 zł brutto · kod KAT01122',
+        img: 'https://sklep361229.shoparena.pl/console/image/resize/nowatermark/1/type/productGfx/image/504.png',
         summary: 'Klej montażowy na MS Polimerze — błyskawiczny chwyt, mocuje ciężkie elementy bez podpierania.',
         use: 'Parapety, listwy, panele ścienne, lustra, elementy dekoracyjne. Łączy stal, aluminium, miedź, szkło, PVC, drewno, beton, ceramikę, G-K.',
         push: 'Chwyt początkowy do 500 kg/m² (bez podpierania!) · wytrzymałość końcowa 22 kg/cm² · elastyczność ±25% · wodoodporny · bez zapachu i rozpuszczalników · malowalny.',
@@ -328,6 +336,7 @@ const CONTENT = {
         limits: 'Nie do PE, PP, teflonu, podłoży bitumicznych · nie do stałego zanurzenia w wodzie.',
         remember: 'Baza MS Polimer · chwyt do 500 kg/m² bez podpierania · korzyść dla wykonawcy: koniec z podpieraniem = szybsza praca.' } },
       { card: { badge: 'Marka własna', name: 'Pianoklej Langer Express 60 sekund', meta: '750 ml · 24,99 zł brutto · kod LGR60S',
+        img: 'https://sklep361229.shoparena.pl/console/image/resize/nowatermark/1/type/productGfx/image/510.webp',
         summary: 'Pianoklej z utwardzaniem startującym po 60 s i korektą przez 2 min. Dla niecierpliwych.',
         use: 'Klejenie płyt EPS/XPS, G-K, drewna, OSB, ścianek działowych; izolacja termiczna, wykończenia wnętrz.',
         push: 'Start utwardzania po 60 s · korekta 2 min · pełne utwardzenie ~2 h · uniwersalna przyczepność · stabilność objętościowa.',
@@ -335,6 +344,7 @@ const CONTENT = {
         limits: 'UV (bez ochrony struktura zaburza się po 14 dni–3 mies.).',
         remember: 'Start utwardzania 60 s · korekta 2 min · max szerokość spoiny 30 mm.' } },
       { card: { badge: 'Marka własna', name: 'Pianoklej Langer do styropianu (XPS, EPS)', meta: '750 ml · 23,99 zł brutto · kod LGRSTYR750',
+        img: 'https://sklep361229.shoparena.pl/console/image/resize/nowatermark/1/type/productGfx/image/672.webp',
         summary: 'Pianoklej do mocowania płyt styropianowych na fasadach i fundamentach. Niska ekspansja.',
         use: 'Mocowanie EPS na fasadach (nowe i remonty), fundamenty, dachówki, parapety. Aplikacja: pasek 3–4 cm od krawędzi płyty + jeden w środku.',
         push: 'Niska ekspansja (nie odkształca izolacji) · wydajność do 10 m²/puszka · λ = 0,034 W/(m·K) · niska wodochłonność.',
@@ -342,6 +352,7 @@ const CONTENT = {
         limits: 'Nie trzyma teflonu, PE, silikonu.',
         remember: 'Wydajność do 10 m² · λ = 0,034 W/(m·K) · do klejenia styropianu EPS na fasadach.' } },
       { card: { name: 'Pistolet T400 PTFE', meta: '79,99 zł brutto · kod N1065',
+        img: 'https://sklep361229.shoparena.pl/console/image/resize/nowatermark/1/type/productGfx/image/558.webp',
         summary: 'Pistolet z powłoką PTFE (teflon) — łatwe czyszczenie, śruba regulacji grubości warkocza = oszczędność pianki, ergonomia.',
         push: 'Dosprzedaż do każdego zamówienia pianek i pianoklejów. W zestawach idzie „za złotówkę" (patrz Moduł 4).',
         remember: 'Przy piankach proponuj zawsze: kontrola aplikacji + oszczędność piany = naturalny dodatek do koszyka.' } },
@@ -629,7 +640,13 @@ function ProductCard({ c }) {
   return (
     <div className={'pcard' + (c.star ? ' star' : '')}>
       <div className="pcard-top">
-        <div>
+        {c.img && (
+          <div className="pcard-thumb">
+            <img src={c.img} alt={c.name} loading="lazy"
+                 onError={e => { const t = e.currentTarget.closest('.pcard-thumb'); if (t) t.style.display = 'none'; }} />
+          </div>
+        )}
+        <div className="pcard-head">
           <div className="pcard-name">{c.star ? '⭐ ' : ''}{c.name}</div>
           {c.meta && <div className="pcard-meta">{c.meta}</div>}
         </div>
@@ -867,12 +884,6 @@ function Module0({ onBack }) {
             <tr><td><b>Langer Dystrybucja</b><br/><span className="muted">od 01.07.2026</span></td><td>stacjonarny B2B</td><td>punkty handlowe / składy</td><td><b>kluczowa</b> — relacja, obsługa punktu</td></tr>
           </tbody>
         </table>
-      </div>
-
-      <div className="prose">
-        <h3>Kontekst 2026</h3>
-        <p>Langer Dystrybucja wchodzi na Mazowsze w miejsce <b>Budmy Chemii</b> (wycofuje się do 01.07.2026).
-        To <b>sukcesja, nie automatyczne przejęcie</b> — klientów trzeba utrzymać relacyjnie.</p>
       </div>
 
       <div style={{ textAlign: 'center', marginTop: 28 }}>
