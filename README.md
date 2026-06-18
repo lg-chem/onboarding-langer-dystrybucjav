@@ -141,6 +141,24 @@ Po tym: strona pokazuje produkty, `/onboarding/` ciągnie karty z bazy, a treś�
 edytujesz w panelach. (Zamiast `setup.sql` możesz też uruchomić sam
 `data/onboarding-schema.sql` i zaimportować karty przyciskiem w panelu onboardingu.)
 
+### Onboarding jako strona startowa + logowanie
+
+Na czas, gdy strona firmowa to jeszcze demo, **adres główny `/` przekierowuje do
+`/onboarding/`** (ustawione w `vercel.json` jako tymczasowy redirect). Demo strony
+nadal jest dostępne pod `/index.html` — żeby przywrócić je jako stronę startową,
+usuń sekcję `redirects` z `vercel.json`.
+
+Onboarding jest **chroniony wspólnym kodem dostępu**. Ustaw w **Settings →
+Environment Variables** zmienną **`ONBOARDING_CODE`** = kod, który rozdasz
+pracownikom. Weryfikacja jest po stronie serwera (`/api/onboarding/auth`), kod nie
+trafia do kodu front-endu. Gdy zmiennej nie ma, onboarding jest otwarty (bez bramki).
+
+| Zmienna | Po co |
+|---|---|
+| `DATABASE_URL` | połączenie z Neon (produkty + karty onboardingu) |
+| `ADMIN_SECRET` | logowanie do paneli admina (`/admin-langer/`) |
+| `ONBOARDING_CODE` | wspólny kod dostępu do nauki na `/onboarding/` |
+
 ### Własna domena
 
 Po wdrożeniu w panelu Vercela: **Settings → Domains → Add** i podaj swoją domenę (np. `langerdystrybucja.pl`). Vercel pokaże jakie rekordy DNS ustawić u Twojego rejestratora.

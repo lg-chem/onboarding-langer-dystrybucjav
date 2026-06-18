@@ -203,6 +203,15 @@ table.t td { padding: 9px 12px; border-top: 1px solid var(--line); vertical-alig
 .note { font-size: 13px; color: var(--ash); margin-top: 24px; text-align: center; }
 .note code { font-family: var(--font-mono); background: var(--light); padding: 1px 6px; border-radius: 4px; }
 
+/* LOGOWANIE */
+.auth-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; background: linear-gradient(180deg, var(--navy) 0%, var(--navy-900) 100%); }
+.auth-card { background: var(--white); border-radius: var(--r-xl); padding: 40px 36px; max-width: 400px; width: 100%; box-shadow: var(--e3); text-align: center; }
+.auth-h { font-family: var(--font-display); font-weight: 700; font-size: 24px; letter-spacing: -0.02em; margin: 18px 0 6px; }
+.auth-d { color: var(--ash-700); font-size: 14.5px; margin: 0 0 22px; line-height: 1.45; }
+.auth-input { width: 100%; font-size: 16px; padding: 13px 14px; border: 1.5px solid var(--line-2); border-radius: var(--r-sm); text-align: center; letter-spacing: .08em; }
+.auth-input:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(14,21,51,.08); }
+.auth-err { background: var(--red-tint); color: var(--red); padding: 10px 14px; border-radius: var(--r-sm); font-size: 13.5px; margin-bottom: 14px; }
+
 @media (max-width: 640px) {
   .hero-h { font-size: 27px; }
   .face-text { font-size: 21px; }
@@ -679,6 +688,17 @@ const IRepeat= (p) => <Svg {...p}><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7
 /* ============================================================
    API + POSTĘP (localStorage)
    ============================================================ */
+async function verifyCode(code) {
+  try {
+    const r = await fetch('/api/onboarding/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code }),
+    });
+    return r.ok;
+  } catch { return false; }
+}
+
 async function fetchCards(module) {
   const res = await fetch(`/api/onboarding/cards?module=${module}`);
   if (!res.ok) throw new Error('API ' + res.status);
@@ -714,6 +734,45 @@ function Logo({ light }) {
       <rect x="18.5" y="38" width="6" height="10" rx="3" fill={light ? '#fff' : 'var(--navy)'} />
       <rect x="13" y="46" width="42" height="13" rx="6.5" fill="var(--flame)" />
     </svg>
+  );
+}
+
+/* ============================================================
+   LOGOWANIE (wspólny kod dostępu)
+   ============================================================ */
+function OnbLogin({ onOk }) {
+  const [code, setCode] = useState('');
+  const [err, setErr] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  async function submit(e) {
+    e.preventDefault();
+    setErr('');
+    if (!code.trim()) { setErr('Wpisz kod dostępu.'); return; }
+    setLoading(true);
+    const ok = await verifyCode(code.trim());
+    setLoading(false);
+    if (ok) {
+      localStorage.setItem('lg_onb_code', code.trim());
+      onOk();
+    } else {
+      setErr('Niepoprawny kod dostępu.');
+    }
+  }
+
+  return (
+    <div className="auth-wrap">
+      <form className="auth-card" onSubmit={submit}>
+        <Logo />
+        <h1 className="auth-h">Onboarding Langer</h1>
+        <p className="auth-d">Strefa wewnętrzna dla pracowników. Podaj kod dostępu, który dostałeś od zespołu.</p>
+        {err && <div className="auth-err">{err}</div>}
+        <input className="auth-input" type="password" value={code} onChange={e => setCode(e.target.value)} placeholder="kod dostępu" autoFocus />
+        <button type="submit" className="btn btn-flame" style={{ width: '100%', marginTop: 14, padding: 14 }} disabled={loading}>
+          {loading ? <><span className="spinner"/> Sprawdzam…</> : 'Wejdź'}
+        </button>
+      </form>
+    </div>
   );
 }
 
@@ -1092,14 +1151,43 @@ function Module1({ onBack, onStats }) {
    APP
    ============================================================ */
 function App() {
+  const [gate, setGate] = useState(null);   // null = ładowanie, true = wymaga kodu, false = otwarte
+  const [authed, setAuthed] = useState(false);
   const [view, setView] = useState(0);     // 'home' | numer modułu
   const [home, setHome] = useState(true);
   const [m1stats, setM1stats] = useState(null);
 
+  useEffect(() => {
+    let alive = true;
+    fetch('/api/onboarding/auth')
+      .then(r => r.ok ? r.json() : { gate: false })
+      .then(g => {
+        if (!alive) return;
+        if (!g.gate) { setGate(false); setAuthed(true); return; }
+        setGate(true);
+        const saved = localStorage.getItem('lg_onb_code');
+        if (saved) {
+          verifyCode(saved).then(ok => {
+            if (!alive) return;
+            if (ok) setAuthed(true);
+            else localStorage.removeItem('lg_onb_code');
+          });
+        }
+      })
+      .catch(() => { if (alive) { setGate(false); setAuthed(true); } }); // API niedostępne (np. podgląd lokalny) → wpuść
+    return () => { alive = false; };
+  }, []);
+
   function open(id) { setHome(false); setView(id); window.scrollTo(0, 0); }
   function back()    { setHome(true); window.scrollTo(0, 0); }
+  function logout()  { localStorage.removeItem('lg_onb_code'); setAuthed(false); setHome(true); }
 
   const mod = MODULES.find(m => m.id === view);
+
+  if (gate === null) return (
+    <div className="main"><p className="muted" style={{ textAlign: 'center', padding: 80 }}><span className="spinner"/> Wczytywanie…</p></div>
+  );
+  if (gate && !authed) return <OnbLogin onOk={() => setAuthed(true)} />;
 
   return (
     <>
@@ -1111,7 +1199,7 @@ function App() {
             <div className="hdr-sub">Langer Grupa</div>
           </div>
         </div>
-        <a className="hdr-btn" href="/" target="_blank" rel="noopener">Strona firmowa →</a>
+        {gate && <button className="hdr-btn" onClick={logout}>Wyloguj</button>}
       </header>
 
       {home && <Home onOpen={open} m1stats={m1stats} />}
