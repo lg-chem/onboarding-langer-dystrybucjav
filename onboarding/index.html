@@ -172,17 +172,23 @@ table.t td { padding: 9px 12px; border-top: 1px solid var(--line); vertical-alig
 .pcard.star { border-color: var(--flame); box-shadow: 0 0 0 1px var(--flame), var(--e1); }
 .pcard-top { display: flex; align-items: flex-start; gap: 14px; flex-wrap: wrap; }
 .pcard-head { flex: 1; min-width: 0; }
-.pcard-thumb { flex: none; width: 78px; height: 78px; border-radius: var(--r-md); background: var(--light); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; padding: 7px; }
+.pcard-thumb { flex: none; width: 92px; height: 92px; border-radius: var(--r-md); background: var(--light); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; padding: 8px; }
 .pcard-thumb img { max-width: 100%; max-height: 100%; object-fit: contain; }
 .pcard-name { font-family: var(--font-display); font-weight: 700; font-size: 18px; line-height: 1.2; }
 .pcard-meta { font-family: var(--font-mono); font-size: 12px; color: var(--ash-700); margin-top: 5px; }
 .pcard-badge { font-size: 11px; font-weight: 700; padding: 4px 11px; border-radius: 999px; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
 .badge-own { background: var(--cobalt-tint); color: var(--cobalt); }
 .badge-best { background: var(--flame-tint); color: var(--flame-700); }
-.pc-rows { margin-top: 16px; display: flex; flex-direction: column; gap: 11px; font-size: 14.5px; }
-.pc-label { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--flame); font-weight: 600; margin-bottom: 3px; }
-.pc-push { background: var(--flame-tint); border-radius: var(--r-sm); padding: 11px 14px; }
-.pc-limit { background: var(--amber-tint); border-radius: var(--r-sm); padding: 11px 14px; color: #7c4a03; }
+.pc-rows { margin-top: 16px; display: flex; flex-direction: column; gap: 14px; font-size: 14.5px; }
+.pc-label { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--flame); font-weight: 600; margin-bottom: 7px; }
+.pc-summary { font-size: 15.5px; line-height: 1.5; color: var(--ink, #1f2937); }
+.pc-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+.chip { display: inline-block; font-size: 13px; line-height: 1.35; padding: 5px 12px; border-radius: 999px; background: var(--light); border: 1px solid var(--line); }
+.chip strong { font-weight: 700; }
+.pc-push { background: var(--flame-tint); border-radius: var(--r-sm); padding: 13px 14px; }
+.pc-push .chip { background: #fff; border-color: #ffd1c2; }
+.pc-limit { background: var(--amber-tint); border-radius: var(--r-sm); padding: 13px 14px; color: #7c4a03; }
+.pc-limit .chip { background: #fff; border-color: #f1dcab; color: #7c4a03; }
 .pc-limit .pc-label { color: #b45309; }
 .pc-remember { background: var(--navy); color: #fff; border-radius: var(--r-sm); padding: 12px 14px; }
 .pc-remember .pc-label { color: #FF9170; }
@@ -598,6 +604,18 @@ function rich(text) {
   );
 }
 
+/* ---- rozbija ciąg na pojedyncze „chipy": po „·", a gdy ich brak — po przecinkach ---- */
+function smartChips(text) {
+  const s = String(text).trim().replace(/\.$/, '');
+  const parts = s.includes(' · ') ? s.split(' · ') : s.split(/,\s+/);
+  return parts.map(p => p.trim()).filter(Boolean);
+}
+const Chips = ({ text }) => (
+  <div className="pc-chips">
+    {smartChips(text).map((x, i) => <span className="chip" key={i}>{rich(x)}</span>)}
+  </div>
+);
+
 /* ---- renderer bloków treści ---- */
 function Block({ b }) {
   if (b.h) return <h3>{b.h}</h3>;
@@ -653,12 +671,12 @@ function ProductCard({ c }) {
         {c.badge && <span className={'pcard-badge ' + (c.badge === 'Marka własna' ? 'badge-own' : 'badge-best')}>{c.badge}</span>}
       </div>
       <div className="pc-rows">
-        {c.summary && <div><div className="pc-label">W skrócie</div>{rich(c.summary)}</div>}
-        {c.use && <div><div className="pc-label">Do czego</div>{rich(c.use)}</div>}
-        {c.push && <div className="pc-push"><div className="pc-label">Na czym pchasz</div>{rich(c.push)}</div>}
-        {c.specs && <div><div className="pc-label">Dane techniczne</div>{rich(c.specs)}</div>}
-        {c.limits && <div className="pc-limit"><div className="pc-label">Uwaga / ograniczenia</div>{rich(c.limits)}</div>}
-        {c.remember && <div className="pc-remember"><div className="pc-label">Zapamiętaj</div>{rich(c.remember)}</div>}
+        {c.summary && <div className="pc-summary">{rich(c.summary)}</div>}
+        {c.use && <div><div className="pc-label">Do czego</div><Chips text={c.use} /></div>}
+        {c.push && <div className="pc-push"><div className="pc-label">💪 Na czym pchasz</div><Chips text={c.push} /></div>}
+        {c.specs && <div><div className="pc-label">Dane techniczne</div><Chips text={c.specs} /></div>}
+        {c.limits && <div className="pc-limit"><div className="pc-label">⚠️ Uwaga / ograniczenia</div><Chips text={c.limits} /></div>}
+        {c.remember && <div className="pc-remember"><div className="pc-label">⭐ Zapamiętaj</div>{rich(c.remember)}</div>}
       </div>
     </div>
   );
